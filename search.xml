@@ -4,6 +4,12 @@
   
     
     <entry>
+      <title><![CDATA[maphub-build-notes]]></title>
+      <url>http://yoursite.com/2015/10/23/maphub-build-notes/</url>
+      <content type="html"><![CDATA[<h1 id="Maphub笔记">Maphub笔记</h1><h2 id="项目说明">项目说明</h2><h2 id="服务端">服务端</h2><h2 id="客户端">客户端</h2>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[test-new]]></title>
       <url>http://yoursite.com/2015/10/23/test-new/</url>
       <content type="html"><![CDATA[<h2 id="just_a_test">just a test</h2><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>]]></content>
