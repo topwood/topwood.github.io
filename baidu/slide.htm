@@ -1,0 +1,418 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.3.5
+    site: https://github.com/ksky521/nodePPT
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>slide - By 李杰</title>
+    <link rel="stylesheet" media="all" href="/css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/css/phone.css">
+    
+    <link rel="stylesheet" href="/js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    
+<link rel="stylesheet" href="/css/theme.color.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Web开发入门介绍</h1>
+<h2>演讲者：李杰</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>内容</h1>
+
+</hgroup><article>
+
+<ul>
+<li>Web基础简介</li>
+<li>学习路线</li>
+<li>必备技能</li>
+</ul>
+<p>抱歉不讲语言基础</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>简介篇</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>后端语言 -&gt; 业务逻辑</h2>
+
+</hgroup><article>
+
+<ul>
+<li>Java</li>
+<li>PHP</li>
+<li>Python</li>
+<li>C++</li>
+<li>Node</li>
+<li>...</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>前端语言 -&gt; 展示交互</h2>
+
+</hgroup><article>
+
+<ul>
+<li>HTML 页面骨架</li>
+<li>CSS 页面皮肤</li>
+<li>Javascript 页面大脑</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p>Web开发大致分为前端和后端，前端主要负责实现视觉和交互效果，以及与服务器通信，完成数据展示。其核心价值在于对
+<strong>用户体验</strong>的追求。</p>
+<p>黑框 -&gt; 界面</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Web开发流程</h1>
+
+</hgroup><article>
+
+<ul>
+<li>需求</li>
+<li>设计原型系统 (Axure)</li>
+<li>技术选型</li>
+<li>美工切图 (PS)</li>
+<li>切页面、套数据 (html&amp;css)</li>
+<li>跟后端交互、调试 (js)</li>
+<li>测试 (测试脚本、真实环境压力测试)</li>
+<li>发布、迭代 (自动部署)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>psd图</h1>
+
+</hgroup><article>
+
+<p><img src="/imgs/psd_example1.jpg" alt="psd图" title="psd"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>原型图</h1>
+
+</hgroup><article>
+
+<p><img src="/imgs/axture.png" alt="原型图" title="原型图"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>切页面</h1>
+
+</hgroup><article>
+
+<p><img src="/imgs/coding_html.png" alt="切页面" title="切页面"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>写交互层</h1>
+
+</hgroup><article>
+
+<p><img src="/imgs/coding_js2.png" alt="交互层" title="交互层"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p>以上是较为原始、常见的开发方式，更“新潮”的方式有下面几种：</p>
+<ol>
+<li>像Angular这种写前端模板，前端路由 ---&gt; 单页应用</li>
+<li>像Express这种写后端模板，后端路由 ---&gt; REST</li>
+<li>...</li>
+</ol>
+<p>用什么技术关键是看需求、场景，没有哪种技术适合任何场景。</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p><a href="http://www.zhihu.com/question/20790576" target="_blank">大公司里怎样开发和部署前端代码？</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>学习路线篇</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>前端基础知识</h1>
+
+</hgroup><article>
+
+<ol>
+<li>html + css 这部分建议在 w3school 在线教程 上学习，边学边练，每章后还有小测试。 之后可以模仿一些网站做些页面。在实践中积累了一些经验后，可以系统的读一两本书，推荐《head first html 与 css 中文版》。</li>
+<li>javascript 要学的内容实在很多，如果没有其他编程语言的基础的话，学起来可能要费些力，还是建议先在 w3school上学习。之后建议马上看《javascript语言精粹》，深入的话看《高程》，js是一门很混乱的语言，精粹这本书能够帮助你区分哪些是语言的精华，哪些是糟粕，对于语言精华，应该深入学习。糟粕部分能看懂别人写的代码就行，自己就不用尝试了。</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>进阶</h1>
+
+</hgroup><article>
+
+<p>有了以上基础，就可以进行一般的静态网页设计，不过对于复杂的页面还需要进一步学习。</p>
+<ol>
+<li>css。《精通css》，看完这本书你应该对：盒子模型，流动，block，inline，层叠，样式优先级，等概念非常了解了。作为练习可以看下《css艺门之匠》这本书，它对标题，背景，圆角，导航条，table，表单等主题都有详细的介绍。之后可以用一下Bootstrap等开源的UI库。</li>
+<li>javascript。上面提到内容还不足以让你胜任js编程。在有了基础之后，进一步学习内容包括：<ul>
+<li>框架、库。推荐jQuery，简单易用，在w3school简单学习js后，直接上手jQuery即可完成一些简单的项目。学习方法也很简单，照着产品文档做几个页面就行了，不用面面俱到，以后遇到问题查文档就行了。框架、库可以帮你屏蔽浏览器的差异性，让你能更专注与web开发学习的精髓部分。</li>
+</ul>
+</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>进阶</h1>
+
+</hgroup><article>
+
+<ul>
+<li>javascript 语言范式 。这个名字可能并不恰当，只是我找不到可以描述“面向对象”，“函数式”这个两个概念的概念。javascript不完全是一个面向对象的语言，它的很多设计理念都有函数编程语言的影子，甚至说如果你不用面向对象，完全可以把它理解成一门函数式编程语言。javascript的很多语言特性，都是因为他具有函数式语言的特点才存在的。这部分推荐先学习面向对象的基本理论，对封装，继承，多态等概念要理解，维基百科，百度百科会是你的帮手，另外推荐《object oriented javascript》，应该有中文版。对与函数式编程我了解的也不系统，不好多说，可以自己百度一下。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>进阶</h1>
+
+</hgroup><article>
+
+<ul>
+<li>javascript 语言内部机制。必须弄清如下概念：js中变量的作用域，变量传递方式，函数的定义环境与执行环境，闭包，函数的四种调用方式（一般函数，对象的方法，apply，call），以及四种调用方式下，‘this&#39;指向的是谁。这部分内容你会在《javascript语言精粹》中详细了解。另外，你必须理解json。</li>
+<li>dom编程，这个web前端工程师的核心技能之一。必读《dom编程艺术》，另外《高性能javascript》这本书中关于dom编程的部分讲的也很好。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>进阶</h1>
+
+</hgroup><article>
+
+<ul>
+<li>ajax编程，这是另一核心技术。ajax建议在网上查些资料，了解这个概念的来龙去脉，百度百科，维基百科上的内容就足够了。真正编程是很容易的，如今几乎所有框架都对ajax有良好的封装，编程并不复杂。</li>
+<li>了解浏览器差异性。这部分包括css和js两部分，浏览器差异内容很多，建议在实践中多多积累。另外对于浏览器的渲染模式，DOCTYPE等内容应该系统学习。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>再进一阶 代码层面</h1>
+
+</hgroup><article>
+
+<p>有了以上知识，对于大多数小型网站，你应该已经可以写出能够工作的代码了。但要想成为更专业的前端，还需继续努力。更高的要求大概还有四方面：</p>
+<ol>
+<li>易维护。对于页面你该理解‘样式’，‘数据’，‘行为’三者分离，对应的当然就是css,html,js。对于js代码，你最好了解设计模式，重构，MVC等内容。对于CSS,最好去了解一下less,sass。</li>
+<li>可测性。</li>
+<li>高性能。必读《高性能javascript》。</li>
+<li>低流量。移动端关注比较多。</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>再进一阶 工程层面</h1>
+
+</hgroup><article>
+
+<p>前端项目同样面临软件生命周期的各个环节，首先是代码管理，你必须学会使用svn或git。其次是代码的构建，如今前端代码构建已经不是简单的压缩一下了，需要进行依赖管理、模块合并、各种编译，比如需要学会使用grunt、gulp等前端构建工具。</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>补充</h1>
+
+</hgroup><article>
+
+<p>可以根据自己的兴趣爱好选择性学习以下内容。</p>
+<ol>
+<li>交互设计。大公司依然有专业人士搞这些，不过不懂交互的前端一定不是好前端。推荐《简约至上》。</li>
+<li>后端。应该说前段工程师必须至少了解一门后端语言，不过如果爱好也可深入学习，入手难度比较低的应该是php了。这部分由可分为基于页面，基于框架两种。大型项目都是基于框架开发的，建议至少了解一个MVC框架，比如php的ci, yii, yaf 等，好还框架的设计思想都大同小异。如今NodeJs在大公司已经得到普遍的使用，推荐大家使用在Node上使用Express框架做一些后端服务的开发。</li>
+<li>Android和ios开发。时至今日，前端的工作领域已经非常广泛，native的界面开发本质上也是前端开发，个大公司都面临着Native环境和web环境页面同时维护的问题，如果能够在技术上得到统一，将会有巨大的价值。对于学有余力的同学，应该了解Native开发的基本流程，至少了解到界面构建的技术。</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>必备技能篇</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>推荐编辑器</h1>
+
+</hgroup><article>
+
+<ul>
+<li>sublime3 -&gt;各种插件 轻</li>
+<li>webstorm 重</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Chrome Developer tools</h1>
+
+</hgroup><article>
+
+<ul>
+<li>调试代码</li>
+<li>查看请求</li>
+<li>查看资源</li>
+<li>...</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Github</h1>
+
+</hgroup><article>
+
+<ul>
+<li>了解<strong>Gitflow</strong></li>
+<li>协同开发实战 Git for windows/Git bash</li>
+<li>学会搜开源项目</li>
+<li>学会看api、demo</li>
+<li>...</li>
+</ul>
+<p>参考：<a href="http://www.imooc.com/learn/390" target="_blank">慕课网-github</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>学会问问题</h1>
+
+</hgroup><article>
+
+<ul>
+<li><a href="http://stackoverflow.com" target="_blank">stackoverflow</a></li>
+<li><a href="http://www.itechzero.com/google-mirror-sites-collect.html" target="_blank">谷歌镜像</a></li>
+<li><a href="http://zhihu.com" target="_blank">知乎</a></li>
+<li><a href="http://segmentfault.com" target="_blank">segmentfault</a></li>
+</ul>
+<p>不要遇到问题马上去问，自己搜索解决也是一种能力。</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Node.js</h1>
+
+</hgroup><article>
+
+<ul>
+<li>扩展了前端的范围，大前端。</li>
+<li>全栈工程师。</li>
+<li>各种前端工具。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>勤总结勤记录</h1>
+
+</hgroup><article>
+
+<p><a href="http://hexo.io/" target="_blank">hexo</a>搭建个人博客,尝试自己修改</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>ES6 新天地！</h1>
+
+</hgroup><article>
+
+<p><a href="http://es6.ruanyifeng.com/" target="_blank">ES6入门</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>安利一些网站和资料</h1>
+
+</hgroup><article>
+
+<ul>
+<li><a href="http://www.zhihu.com/question/22689579" target="_blank">什么是?</a></li>
+<li><a href="http://www.imooc.com/" target="_blank">慕课网</a></li>
+<li><a href="https://github.com/baidu-ife/ife" target="_blank">百度ife</a></li>
+<li>。。。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>前端知识太广更新太快！</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>谢谢</h1>
+
+</hgroup><article>
+
+<ul>
+<li>QQ: 869221472</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.3.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="/js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="/js/mixjs/lib/event/broadcast.js"></script>
+<script src="/js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'cards',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="/js/demo.js"></script>
+<link rel="stylesheet" href="/css/demo.css">
+
+<!--placeholder-->
+</body>
+</html>
