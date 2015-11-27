@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Topwood&#39;s blog</title>
+  <title>node-call-dll | Topwood&#39;s blog</title>
   <meta name="author" content="Topwood LiJie">
   
-  <meta name="description" content="Topwood的博客 前端 GIS">
+  <meta name="description" content="how node call-dll">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="node-call-dll"/>
   <meta property="og:site_name" content="Topwood&#39;s blog"/>
 
   
@@ -95,40 +95,34 @@ var _hmt = _hmt || [];
 
   <div class="container">
   	<div class="content">
-    	 <div class="page-header">
-  <h1>hahaha!</h1>
-</div>
+    	 
 
-<div class="row page">
 
 	
+		<div class="page-header">		
+			<h1> node-call-dll</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
 	<div class="col-md-9">
 	
 
-		<div class="slogan">
-      <i class="fa fa-heart"></i>
-      go go go!
-</div>    
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-		
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>how node call-dll</p>
 			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-11-26 </div>
-			<div class="article-title"><a href="/2015/11/26/node-call-dll/" title="how node call-dll">node-call-dll</a></div>						
-		</h3>
-	
+		 </div> <!-- alert -->
+	  		
 
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="研究在Node中如何调用dll">研究在Node中如何调用dll</h1><h2 id="背景">背景</h2><p>根据项目需要，我们会有一个vs（2010/2013）生成的dll，在我们的Node服务器上调用，该dll中有一个主要的函数为’getTile’，用来返回某个瓦片（本质是一张图片），该dll由别的单位合作完成，我们只负责调用。getTile函数大概长这样：</p>
+	  <h1 id="研究在Node中如何调用dll">研究在Node中如何调用dll</h1><h2 id="背景">背景</h2><p>根据项目需要，我们会有一个vs（2010/2013）生成的dll，在我们的Node服务器上调用，该dll中有一个主要的函数为’getTile’，用来返回某个瓦片（本质是一张图片），该dll由别的单位合作完成，我们只负责调用。getTile函数大概长这样：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * id: 字符串，图层名</span><br><span class="line"> * x，y，z: 瓦片坐标</span><br><span class="line"> * len: buffer长度</span><br><span class="line"> */</span></span><br><span class="line"><span class="function">EXPORT <span class="keyword">char</span>* <span class="title">getTile</span><span class="params">(<span class="keyword">char</span>* id,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> l,<span class="keyword">int</span>* len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">//此处是别人的逻辑代码，这里用打开文件模拟。</span></span><br><span class="line">	FILE *fin = fopen(<span class="string">"a.jpg"</span>, <span class="string">"rb"</span>);</span><br><span class="line">	<span class="keyword">char</span>* buf = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="number">1024</span>*<span class="number">1024</span>);</span><br><span class="line">	*len = fread(buf, <span class="number">1</span>, <span class="number">1024</span>*<span class="number">1024</span>, fin);</span><br><span class="line">	<span class="keyword">return</span> buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们两方的平台（操作系统和vs）应该是一致的。</p>
 <h2 id="方案">方案</h2><ol>
@@ -142,134 +136,112 @@ var _hmt = _hmt || [];
 <h2 id="任务">任务</h2><p>在本地自己写一个测试代码，生成一个dll,在Node环境中成功调用该dll.</p>
 <h2 id="遇到的问题">遇到的问题</h2><p>目前使用node-ffi调用dll，遇到调用失败的问题<br><a href="https://cnodejs.org/topic/56570ec1b1e04fda51bcdf51" target="_blank" rel="external">https://cnodejs.org/topic/56570ec1b1e04fda51bcdf51</a></p>
 <h2 id="解决方法">解决方法</h2><p>原来我在VS中创建的项目是win32项目，必须将项目设置为x64项目。我的机器是win7 64位，Node是0.10.40的64位。改变设置之后，生成的dll能与使用cl.exe v64生成的一样在Node中成功调用。</p>
-
-	
+	  
 	</div>
-  <a type="button" href="/2015/11/26/node-call-dll/#more" class="btn btn-default more">閱讀本文</a>
-</div>
 
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-10-25 </div>
-			<div class="article-title"><a href="/2015/10/25/todo-list/" title="将要做的事情">todo-list</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="学习ES6">学习ES6</h2><p><a href="http://es6.ruanyifeng.com/#docs/intro" target="_blank" rel="external">阮一峰的博客</a><br>最新版的node4.x貌似支持es6语法</p>
-<h2 id="学习Sass">学习Sass</h2><p><a href="http://www.w3cplus.com/sassguide/" target="_blank" rel="external">w3cplus</a><br><a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰的博客</a></p>
-<h2 id="webpack">webpack</h2><h2 id="react">react</h2><h2 id="gulp">gulp</h2><h2 id="CSS">CSS</h2><p>具备将一张psd图转化成html+css代码的能力</p>
-
-	
-	</div>
-  <a type="button" href="/2015/10/25/todo-list/#more" class="btn btn-default more">閱讀本文</a>
-</div>
-
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
+	<div>
+  	<center>
+	<div class="pagination">
 <ul class="pagination">
 	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一頁</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/10/25/todo-list/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
 </ul>
 </div>
 
-  		</center>
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2015/11/26/node-call-dll/" data-title="node-call-dll" data-url="http://www.18710847003.com/2015/11/26/node-call-dll/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-11-26 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/node/">node<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/node-ffi-c-dll/">node ffi c++ dll<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#研究在Node中如何调用dll"><span class="toc-article-text">研究在Node中如何调用dll</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#背景"><span class="toc-article-text">背景</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#方案"><span class="toc-article-text">方案</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#任务"><span class="toc-article-text">任务</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#遇到的问题"><span class="toc-article-text">遇到的问题</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#解决方法"><span class="toc-article-text">解决方法</span></a></li></ol></li></ol>
 		</div>
-
-		
-		
-	</div> <!-- col-md-9 -->
-
 	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div class="form-group has-success has-feedback" id="site_search">
-    <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜尋" class="st-search-input st-default-search-input form-control" />
-    </form>
-  </div>  
-
-
-		
-			
-	<div class="widget">
-		<h4>分類</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/node/">node<span>1</span></a></li>
-		
-			<li><a href="/categories/todo/">todo<span>1</span></a></li>
-		
-		</ul>
 	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
 
-		
-			
-	<div class="widget">
-		<h4>標籤雲</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/node-ffi-c-dll/">node ffi c++ dll<span>1</span></a></li>
-		
-			<li><a href="/tags/todo/">todo<span>1</span></a></li>
-		
-		 
-		</ul>
 	</div>
-
-
 		
-			
-<div class="widget">
-  <h4>最新文章</h4>
-  <ul class="entry list-unstyled">
-    
-      <li>
-        <a href="/2015/11/26/node-call-dll/"  title="how node call-dll" ><i class="fa fa-file-o"></i>node-call-dll...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/10/25/todo-list/"  title="将要做的事情" ><i class="fa fa-file-o"></i>todo-list...</a>
-      </li>
-    
-  </ul>
-</div>
 
-		
-			
-<div class="widget">
-	<h4>鏈接</h4>
-	<ul class="blogroll list-unstyled">
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/topwood" title="my git hub" target="_blank"]);">Github</a></li>
-	
-		<li><i class=""></i><a href="http://www.zhihu.com/people/li-da-shan-15-59" title="my zhihu." target="_blank"]);">知乎</a></li>
-	
-	</ul>
-</div>
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
 
 
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
 
-	
-	
-</div> <!-- row-fluid -->
 	</div>
   </div>
   <div class="container-narrow">

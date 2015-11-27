@@ -4,29 +4,31 @@
   
     
     <entry>
-      <title><![CDATA[maphub-build-notes]]></title>
-      <url>http://yoursite.com/2015/10/23/maphub-build-notes/</url>
-      <content type="html"><![CDATA[<h1 id="Maphub笔记">Maphub笔记</h1><h2 id="项目说明">项目说明</h2><h2 id="服务端">服务端</h2><h2 id="客户端">客户端</h2>]]></content>
+      <title><![CDATA[node-call-dll]]></title>
+      <url>http://www.18710847003.com/2015/11/26/node-call-dll/</url>
+      <content type="html"><![CDATA[<h1 id="研究在Node中如何调用dll">研究在Node中如何调用dll</h1><h2 id="背景">背景</h2><p>根据项目需要，我们会有一个vs（2010/2013）生成的dll，在我们的Node服务器上调用，该dll中有一个主要的函数为’getTile’，用来返回某个瓦片（本质是一张图片），该dll由别的单位合作完成，我们只负责调用。getTile函数大概长这样：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * id: 字符串，图层名</span><br><span class="line"> * x，y，z: 瓦片坐标</span><br><span class="line"> * len: buffer长度</span><br><span class="line"> */</span></span><br><span class="line"><span class="function">EXPORT <span class="keyword">char</span>* <span class="title">getTile</span><span class="params">(<span class="keyword">char</span>* id,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> l,<span class="keyword">int</span>* len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">//此处是别人的逻辑代码，这里用打开文件模拟。</span></span><br><span class="line">	FILE *fin = fopen(<span class="string">"a.jpg"</span>, <span class="string">"rb"</span>);</span><br><span class="line">	<span class="keyword">char</span>* buf = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="number">1024</span>*<span class="number">1024</span>);</span><br><span class="line">	*len = fread(buf, <span class="number">1</span>, <span class="number">1024</span>*<span class="number">1024</span>, fin);</span><br><span class="line">	<span class="keyword">return</span> buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们两方的平台（操作系统和vs）应该是一致的。</p>
+<h2 id="方案">方案</h2><ol>
+<li><p>原生模块法<br>用c++编写Node原生模块，在原生模块里面调用人家的dll。等于是在人家的dll外面再封装一层。该方法需要学习一下如何编写原生模块(addon)。</p>
+</li>
+<li><p>借助<a href="https://github.com/node-ffi/node-ffi" target="_blank" rel="external">node-fii</a><br>该方法虽然调用简单，但是实际使用起来坑比较多。也有环境的<a href="https://github.com/nodejs/node-gyp#installation" target="_blank" rel="external">依赖</a>。在node-ffi的目录下有简单的example可以参考。</p>
+</li>
+<li><p>其他方式（swig..）</p>
+</li>
+</ol>
+<h2 id="任务">任务</h2><p>在本地自己写一个测试代码，生成一个dll,在Node环境中成功调用该dll.</p>
+<h2 id="遇到的问题">遇到的问题</h2><p>目前使用node-ffi调用dll，遇到调用失败的问题<br><a href="https://cnodejs.org/topic/56570ec1b1e04fda51bcdf51" target="_blank" rel="external">https://cnodejs.org/topic/56570ec1b1e04fda51bcdf51</a></p>
+<h2 id="解决方法">解决方法</h2><p>原来我在VS中创建的项目是win32项目，必须将项目设置为x64项目。我的机器是win7 64位，Node是0.10.40的64位。改变设置之后，生成的dll能与使用cl.exe v64生成的一样在Node中成功调用。</p>
+]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[test-new]]></title>
-      <url>http://yoursite.com/2015/10/23/test-new/</url>
-      <content type="html"><![CDATA[<h2 id="just_a_test">just a test</h2><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>http://yoursite.com/2015/10/23/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+      <title><![CDATA[todo-list]]></title>
+      <url>http://www.18710847003.com/2015/10/25/todo-list/</url>
+      <content type="html"><![CDATA[<h2 id="学习ES6">学习ES6</h2><p><a href="http://es6.ruanyifeng.com/#docs/intro" target="_blank" rel="external">阮一峰的博客</a><br>最新版的node4.x貌似支持es6语法</p>
+<h2 id="学习Sass">学习Sass</h2><p><a href="http://www.w3cplus.com/sassguide/" target="_blank" rel="external">w3cplus</a><br><a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰的博客</a></p>
+<h2 id="webpack">webpack</h2><h2 id="react">react</h2><h2 id="gulp">gulp</h2><h2 id="CSS">CSS</h2><p>具备将一张psd图转化成html+css代码的能力</p>
 ]]></content>
     </entry>
     
