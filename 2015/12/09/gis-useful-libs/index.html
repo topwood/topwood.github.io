@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>GIS常用库（web前端） | Topwood&#39;s blog</title>
+  <meta name="author" content="Topwood LiJie">
+  
+  <meta name="description" content="Topwood的博客 前端 GIS">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="GIS常用库（web前端）"/>
+  <meta property="og:site_name" content="Topwood&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?56718378a51bfc2a29cdb155f09b4fbf";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Topwood&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> GIS常用库（web前端）</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p><a href="http://openlayers.org/" target="_blank" rel="external">openlayers3/ol3</a><br><a href="http://cesiumjs.org" target="_blank" rel="external">Cesium.js</a></p>
+</blockquote>
+<h2 id="openlayers3/ol3">openlayers3/ol3</h2><blockquote>
+<p>A high-performance, feature-packed library for all your mapping needs.</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map = <span class="keyword">new</span> ol.<span class="built_in">Map</span>(&#123;</span><br><span class="line">  layers: [</span><br><span class="line">    <span class="keyword">new</span> ol.layer.Tile(&#123;</span><br><span class="line">      source: <span class="keyword">new</span> ol.source.OSM()</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">  target: <span class="string">'map'</span>,</span><br><span class="line">  controls: ol.control.defaults(&#123;</span><br><span class="line">    attributionOptions: <span class="comment"><span class="markdown">/<span class="emphasis">** @type &#123;olx.control.AttributionOptions&#125; *</span>/</span></span> (&#123;</span><br><span class="line">      collapsible: <span class="keyword">false</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;),</span><br><span class="line">  view: <span class="keyword">new</span> ol.View(&#123;</span><br><span class="line">    center: [<span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    zoom: <span class="number">2</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>ol3的一些概念（map/view/layer/source…）更贴近GIS中的一些概念。ol3使用goog实现模块化和构建。</p>
+<h2 id="Cesium-js">Cesium.js</h2><blockquote>
+<p>An open-source JavaScript library for world-class 3D globes and maps</p>
+</blockquote>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="string">'cesiumContainer'</span>);</span><br></pre></td></tr></table></figure>
+<p>Cesium用require实现模块化。</p>
+<h2 id="Cesium与ol3有一些不同点：">Cesium与ol3有一些不同点：</h2><ol>
+<li>Cesium的概念没有很贴合GIS中的概念。</li>
+<li>ol3只有2D地图，cesium有2D/2.5D/3D。</li>
+<li>Cesium支持自己定义的动态czml格式。</li>
+</ol>
+<h2 id="共同点：">共同点：</h2><p>文档、example都相当齐全,新版本频繁迭代。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/12/09/nodejs-useful-modules/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2015/12/09/gis-useful-libs/" data-title="GIS常用库（web前端）" data-url="http://www.18710847003.com/2015/12/09/gis-useful-libs/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-12-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/gis/">gis<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/gis/">gis<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#openlayers3/ol3"><span class="toc-article-text">openlayers3/ol3</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Cesium-js"><span class="toc-article-text">Cesium.js</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Cesium与ol3有一些不同点："><span class="toc-article-text">Cesium与ol3有一些不同点：</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#共同点："><span class="toc-article-text">共同点：</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2015 Topwood LiJie
+  
+   	<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+	<span id="busuanzi_container_page_pv" style='display:none'>
+  		当前页面总阅读量<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+</p>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4omjxtiikqhuMyMYz-QF','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

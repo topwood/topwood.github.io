@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Node的一些常用的模块(不定时更新) | Topwood&#39;s blog</title>
+  <meta name="author" content="Topwood LiJie">
+  
+  <meta name="description" content="简介">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Node的一些常用的模块(不定时更新)"/>
+  <meta property="og:site_name" content="Topwood&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?56718378a51bfc2a29cdb155f09b4fbf";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Topwood&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> Node的一些常用的模块(不定时更新)</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>简介</p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <blockquote>
+<p>PM2<br>Express<br>Loadash<br>Q<br>Request<br>Bluebird<br>EventProxy<br>node-webkit</p>
+</blockquote>
+<h2 id="PM2"><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">PM2</a></h2><blockquote>
+<p>PM2是一个带有负载均衡功能的Node应用的进程管理器。当你要把你的独立代码利用全部的服务器上的所有CPU，并保证进程永远都活着，0秒的重载， PM2是完美的。</p>
+</blockquote>
+<p>常用功能：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js[ --name my-api] <span class="preprocessor"># 启动start.js后台进程[,命名进程为my-api]</span></span><br><span class="line">pm2 <span class="built_in">list</span>               <span class="preprocessor"># 显示所有进程状态</span></span><br><span class="line">pm2 monit              <span class="preprocessor"># 监视所有进程</span></span><br><span class="line">pm2 logs               <span class="preprocessor">#  显示所有进程日志</span></span><br><span class="line">pm2 stop all           <span class="preprocessor"># 停止所有进程</span></span><br><span class="line">pm2 restart all        <span class="preprocessor"># 重启所有进程</span></span><br><span class="line">pm2 reload all         <span class="preprocessor"># <span class="number">0</span>秒停机重载进程 (用于 NETWORKED 进程)</span></span><br><span class="line">pm2 stop <span class="number">0</span>             <span class="preprocessor"># 停止指定的进程</span></span><br><span class="line">pm2 restart <span class="number">0</span>          <span class="preprocessor"># 重启指定的进程</span></span><br><span class="line">pm2 startup            <span class="preprocessor"># 产生 init 脚本 保持进程活着</span></span><br><span class="line">pm2 web                <span class="preprocessor"># 运行健壮的 computer API endpoint (http:<span class="comment">//domain:9615)</span></span></span><br><span class="line">pm2 <span class="keyword">delete</span> <span class="number">0</span>           <span class="preprocessor"># 杀死指定的进程</span></span><br><span class="line">pm2 <span class="keyword">delete</span> all         <span class="preprocessor"># 杀死全部进程</span></span><br></pre></td></tr></table></figure></p>
+<p>类似功能的有forver,supervisor</p>
+<h2 id="Express"><a href="https://github.com/strongloop/express" target="_blank" rel="external">Express</a></h2><blockquote>
+<p>一个强大的后端框架，是目前Node最火的后端框架了吧。</p>
+</blockquote>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = require(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">var</span> app = express()</span><br><span class="line"> </span><br><span class="line">app.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(req, res)</span> </span>&#123;</span><br><span class="line">  res.send(<span class="string">'Hello World'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>以上代码简简单单搭建一个服务器！</p>
+<h2 id="Loadash">Loadash</h2><blockquote>
+<p>一个常用的js库，类似于underscore</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_.assign(&#123; <span class="string">'a'</span>: <span class="number">1</span> &#125;, &#123; <span class="string">'b'</span>: <span class="number">2</span> &#125;, &#123; <span class="string">'c'</span>: <span class="number">3</span> &#125;);</span><br><span class="line"><span class="comment">// → &#123; 'a': 1, 'b': 2, 'c': 3 &#125;</span></span><br><span class="line">_.<span class="built_in">map</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], function(n) &#123; <span class="keyword">return</span> n * <span class="number">3</span>; &#125;);</span><br><span class="line"><span class="comment">// → [3, 6, 9]</span></span><br></pre></td></tr></table></figure>
+<h2 id="Q">Q</h2><blockquote>
+<p>一个常用异步promises库，用来解决回调金字塔。</p>
+</blockquote>
+<figure class="highlight scilab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//未使用Q的回调</span></span><br><span class="line">step1(<span class="function"><span class="keyword">function</span> <span class="params">(value1)</span> &#123;</span></span><br><span class="line">    step2(value1, <span class="function"><span class="keyword">function</span><span class="params">(value2)</span> &#123;</span></span><br><span class="line">        step3(value2, <span class="function"><span class="keyword">function</span><span class="params">(value3)</span> &#123;</span></span><br><span class="line">            step4(value3, <span class="function"><span class="keyword">function</span><span class="params">(value4)</span> &#123;</span></span><br><span class="line">                <span class="comment">// Do something with value4 </span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//使用Q后</span></span><br><span class="line"><span class="transposed_variable">Q.</span>fcall(promisedStep1)</span><br><span class="line">.<span class="keyword">then</span>(promisedStep2)</span><br><span class="line">.<span class="keyword">then</span>(promisedStep3)</span><br><span class="line">.<span class="keyword">then</span>(promisedStep4)</span><br><span class="line">.<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span> <span class="params">(value4)</span> &#123;</span></span><br><span class="line">    <span class="comment">// Do something with value4 </span></span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">catch</span>(<span class="function"><span class="keyword">function</span> <span class="params">(error)</span> &#123;</span></span><br><span class="line">    <span class="comment">// Handle any error from all above steps </span></span><br><span class="line">&#125;)</span><br><span class="line">.done();</span><br></pre></td></tr></table></figure>
+<h2 id="Request">Request</h2><blockquote>
+<p>一个HTTP客户端库<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line">request(<span class="string">'http://www.google.com'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!error &amp;&amp; response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(body) <span class="comment">// Show the HTML for the Google homepage. </span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="Bulebird">Bulebird</h2><blockquote>
+<p>另一个强大的promise库。</p>
+</blockquote>
+<h2 id="EventProxy">EventProxy</h2><blockquote>
+<p>朴大师写的用事件的思想来解耦异步的库。</p>
+</blockquote>
+<h2 id="node-webkit">node-webkit</h2><blockquote>
+<p>将前后端整合到一起打包成一个桌面应用！</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>x<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">    	<span class="comment">// 使用node.js获取系统平台</span></span><br><span class="line">    	<span class="keyword">var</span> os = <span class="built_in">require</span>(<span class="string">'os'</span>)</span><br><span class="line">    	<span class="built_in">document</span>.write(<span class="string">'Our computer is: '</span>, os.platform())</span><br><span class="line">  </span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="说明">说明</h2><p>以上所有模块均可在github或者npm上搜到，故不再给出链接。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2015/12/09/gis-useful-libs/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/11/26/node-call-dll/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2015/12/09/nodejs-useful-modules/" data-title="Node的一些常用的模块(不定时更新)" data-url="http://www.18710847003.com/2015/12/09/nodejs-useful-modules/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-12-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/node/">node<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/node/">node<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PM2"><span class="toc-article-text">PM2</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Express"><span class="toc-article-text">Express</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Loadash"><span class="toc-article-text">Loadash</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Q"><span class="toc-article-text">Q</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Request"><span class="toc-article-text">Request</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Bulebird"><span class="toc-article-text">Bulebird</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#EventProxy"><span class="toc-article-text">EventProxy</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#node-webkit"><span class="toc-article-text">node-webkit</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#说明"><span class="toc-article-text">说明</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2015 Topwood LiJie
+  
+   	<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+	<span id="busuanzi_container_page_pv" style='display:none'>
+  		当前页面总阅读量<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+</p>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4omjxtiikqhuMyMYz-QF','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
