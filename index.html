@@ -118,6 +118,50 @@ var _hmt = _hmt || [];
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2015-12-10 </div>
+			<div class="article-title"><a href="/2015/12/10/doufm-download-songs/" >爬取doufm歌曲数据</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="介绍">介绍</h2><p>doufm是由某某大神建立在校内的一个fm网站，上面的歌曲很耐听，导致我经常在上面听歌。毕业季将至，在校外是访问不到的，所以觉得可以down下上面的所有歌曲，在bt上分享给校友。还有，校园网无需登录就能听歌。<br><img src="http://7te95y.com1.z0.glb.clouddn.com/doufm.png" alt="doufm"></p>
+<h2 id="分析">分析</h2><p>用Chrome简单看了下网站的前端代码。发现是用Angular1.x做框架的。分析了下请求的链接、返回的结构，有这两个比较重要的api:</p>
+<h3 id="请求播放频道">请求播放频道</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/doufm.info/api</span><span class="regexp">/playlist/</span>?</span><br></pre></td></tr></table></figure>
+<p>返回值<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "<span class="attribute">key</span>": <span class="value"><span class="string">"52f8ca1d1d41c851663fcba7"</span></span>, </span><br><span class="line">        "<span class="attribute">music_list</span>": <span class="value"><span class="number">3726</span></span>, </span><br><span class="line">        "<span class="attribute">name</span>": <span class="value"><span class="string">"\u534e\u8bed"</span></span><br><span class="line">    </span>&#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        "<span class="attribute">key</span>": <span class="value"><span class="string">"52f8ca1d1d41c851663fcba8"</span></span>, </span><br><span class="line">        "<span class="attribute">music_list</span>": <span class="value"><span class="number">2451</span></span>, </span><br><span class="line">        "<span class="attribute">name</span>": <span class="value"><span class="string">"\u6b27\u7f8e"</span></span><br><span class="line">    </span>&#125;,</span><br><span class="line">    ....</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>哦好，一共有这么多频道，每个频道的歌曲数目有”music_list”那么多个，名字一眼看不出来，没关系，放到chrome的console里面，toString()一下！</p>
+<h3 id="请求歌曲列表">请求歌曲列表</h3><p>由于网站上每次只请求10个歌曲，10个播完了再去请求另外10个，这样比较科学。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/doufm.info/api</span><span class="regexp">/playlist/</span><span class="number">52</span>f8ca1d1d41c851663fcba7/?num=<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>不难发现52f8ca1d1d41c851663fcba7就是上面的频道的Key啦。默认的值是华语的那个key。<br>好的，我把num设置成10000！<br>返回：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "<span class="attribute">album</span>": <span class="value"><span class="string">"\u534a\u516c\u5f00\u7684\u79d8\u5bc6"</span></span>, </span><br><span class="line">        "<span class="attribute">artist</span>": <span class="value"><span class="string">"\u6cf3\u513f"</span></span>, </span><br><span class="line">        "<span class="attribute">audio</span>": <span class="value"><span class="string">"/api/fs/52fed50d1d41c80a7e60923e/"</span></span>, </span><br><span class="line">        "<span class="attribute">company</span>": <span class="value"><span class="string">"EMI"</span></span>, </span><br><span class="line">        "<span class="attribute">cover</span>": <span class="value"><span class="string">"/api/fs/52fed50d1d41c80a7e60923c/"</span></span>, </span><br><span class="line">        "<span class="attribute">kbps</span>": <span class="value"><span class="string">"64"</span></span>, </span><br><span class="line">        "<span class="attribute">key</span>": <span class="value"><span class="string">"52fed5131d41c80a7e609247"</span></span>, </span><br><span class="line">        "<span class="attribute">public_time</span>": <span class="value"><span class="string">"2011"</span></span>, </span><br><span class="line">        "<span class="attribute">title</span>": <span class="value"><span class="string">"\u767e\u53d8\u5973\u738b"</span></span>, </span><br><span class="line">        "<span class="attribute">upload_date</span>": <span class="value"><span class="string">"Sat, 15 Feb 2014 10:46:43 -0000"</span></span><br><span class="line">    </span>&#125;, </span><br><span class="line">    ....</span><br></pre></td></tr></table></figure></p>
+<p>好吧，这些字段的意思都相当明显了，看到这里几乎就知道该怎么下了，关键是那个audio字段。一看请求，发现果然会去请求那个audio<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/doufm.info/api</span><span class="regexp">/fs/</span><span class="number">52</span>fed50d1d41c80a7e60923e/</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//response headers</span></span><br><span class="line">Connection:keep-alive</span><br><span class="line">Content-Length:<span class="number">2083968</span></span><br><span class="line">Content-Type:application/octet-stream</span><br><span class="line">Date:Thu, <span class="number">10</span> Dec <span class="number">2015</span> <span class="number">01</span>:<span class="number">15</span>:<span class="number">53</span> GMT</span><br><span class="line">Server:nginx/<span class="number">1.4</span><span class="number">.7</span></span><br></pre></td></tr></table></figure>
+<p>明显这个就是一个歌曲嘛，好的，爬它！其他的东西有cover什么的，不需要了，我只要歌曲和它的title用来当做文件名存。</p>
+<h2 id="Request模块">Request模块</h2><blockquote>
+<p>一个HTTP客户端库</p>
+</blockquote>
+<p>当然我是用Node来爬数据了，选择了Requset。pipe()相当好用啊！<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (songs.length) &#123;</span><br><span class="line">	<span class="keyword">var</span> song = songs.pop();</span><br><span class="line">	<span class="keyword">var</span> name = song.title;</span><br><span class="line">	<span class="keyword">var</span> url = baseurl + song.audio;</span><br><span class="line">	<span class="keyword">var</span> ws = fs.createWriteStream(<span class="keyword">dir</span> + name+<span class="string">".mp3"</span>);</span><br><span class="line">	ws.<span class="keyword">on</span>('<span class="keyword">error</span>',function (<span class="keyword">err</span>) &#123;</span><br><span class="line">		console.<span class="literal">log</span>(<span class="keyword">err</span>);</span><br><span class="line">	&#125;)</span><br><span class="line">	request(url).<span class="keyword">on</span>('<span class="keyword">error</span>', function(<span class="keyword">e</span>) &#123;</span><br><span class="line">		console.<span class="literal">log</span>(<span class="keyword">e</span>);</span><br><span class="line">	&#125;).pipe(ws);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好的，大概就这样的代码。哇靠，好简单，是啊，没什么技术含量的。</p>
+<h2 id="遇到的坑">遇到的坑</h2><p>当然我主要是想记录下遇到的坑咯。</p>
+<h3 id="文件名">文件名</h3><p>有的歌曲文件名（title）里面带有一些特殊字符<br>比如： ‘?’ 和 ‘/‘ 之类的，在调用fs.createWriteStream时报错！<br>原因在于，windows的文件名不允许有这种字符！<br>解决方法：<br>正则比配，将有特殊字符的song.name给替换了。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name.replace(<span class="string">'/\//'</span>,<span class="string">''</span>).replace(<span class="string">'/\?/'</span>,<span class="string">''</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="捕获stream的错误">捕获stream的错误</h3><p>由于上面的调用createWriteStream时报错，一开始想捕获一下错误看看是啥，于是写了一个时报错，一开始想捕获一下错误看看是啥，于是写了一个<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;<span class="keyword">catch</span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果发现并没有什么软用，捕获不到错误!搜搜搜！<br>原来createWriteStream是个异步方法，try、catch捕获不了啊！看了下stream都继承了EventEmitter,有一些特定的响应事件的，就用这个：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ws</span>.<span class="keyword">on</span>(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span> <span class="params">(err)</span> &#123;</span></span><br><span class="line">		console.<span class="built_in">log</span>(err);</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="歌曲重名">歌曲重名</h3><p>下了一个频道的歌曲之后发现，咦，怎么比列表上的少，哦，原来是歌曲有可能重名的。<br>解决的方法也蛮多的。<br>我的做法是先做一步预处理，将同名的歌曲都找出来，改改名。比如一个叫a.mp3，有重名的以后就叫a1.mp3、a2.mp3。一次类推。</p>
+<h2 id="结果">结果</h2><p>下载了大概40G的歌曲，一共将近2w多个歌。亲测可用！</p>
+<h2 id="不足">不足</h2><p>下载到的歌在windows下面。<br><img src="http://7te95y.com1.z0.glb.clouddn.com/doufm_songs.png" alt="songs"><br>没有作者信息，流派信息，专辑信息等等。</p>
+
+	
+	</div>
+  <a type="button" href="/2015/12/10/doufm-download-songs/#more" class="btn btn-default more">閱讀本文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2015-12-09 </div>
 			<div class="article-title"><a href="/2015/12/09/gis-useful-libs/" >GIS常用库（web前端）</a></div>						
 		</h3>
@@ -150,7 +194,7 @@ var _hmt = _hmt || [];
 
 	
 	</div>
-  <a type="button" href="/2015/12/09/gis-useful-libs/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2015/12/09/gis-useful-libs/#more" class="btn btn-default more">閱讀本文</a>
 </div>
 
 		
@@ -206,7 +250,7 @@ var _hmt = _hmt || [];
 
 	
 	</div>
-  <a type="button" href="/2015/12/09/nodejs-useful-modules/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2015/12/09/nodejs-useful-modules/#more" class="btn btn-default more">閱讀本文</a>
 </div>
 
 		
@@ -247,7 +291,7 @@ var _hmt = _hmt || [];
 
 	
 	</div>
-  <a type="button" href="/2015/11/26/node-call-dll/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2015/11/26/node-call-dll/#more" class="btn btn-default more">閱讀本文</a>
 </div>
 
 		
@@ -271,7 +315,7 @@ var _hmt = _hmt || [];
 
 	
 	</div>
-  <a type="button" href="/2015/10/25/todo-list/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2015/10/25/todo-list/#more" class="btn btn-default more">閱讀本文</a>
 </div>
 
 		
@@ -301,7 +345,7 @@ var _hmt = _hmt || [];
 			
   <div class="form-group has-success has-feedback" id="site_search">
     <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜尋" class="st-search-input st-default-search-input form-control" />
     </form>
   </div>  
 
@@ -309,12 +353,12 @@ var _hmt = _hmt || [];
 		
 			
 	<div class="widget">
-		<h4>Categories</h4>
+		<h4>分類</h4>
 		<ul class="tag_box inline list-unstyled">
 		
 			<li><a href="/categories/gis/">gis<span>1</span></a></li>
 		
-			<li><a href="/categories/node/">node<span>2</span></a></li>
+			<li><a href="/categories/node/">node<span>3</span></a></li>
 		
 			<li><a href="/categories/todo/">todo<span>1</span></a></li>
 		
@@ -324,20 +368,20 @@ var _hmt = _hmt || [];
 		
 			
 	<div class="widget">
-		<h4>Tag Cloud</h4>
+		<h4>標籤雲</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
 			<li><a href="/tags/dll/">dll<span>1</span></a></li>
 		
-			<li><a href="/tags/ffi/">ffi<span>1</span></a></li>
-		
-			<li><a href="/tags/gis/">gis<span>1</span></a></li>
-		
 			<li><a href="/tags/todo/">todo<span>1</span></a></li>
+		
+			<li><a href="/tags/ffi/">ffi<span>1</span></a></li>
 		
 			<li><a href="/tags/c/">c++<span>1</span></a></li>
 		
-			<li><a href="/tags/node/">node<span>2</span></a></li>
+			<li><a href="/tags/node/">node<span>3</span></a></li>
+		
+			<li><a href="/tags/gis/">gis<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -347,8 +391,12 @@ var _hmt = _hmt || [];
 		
 			
 <div class="widget">
-  <h4>Recent Posts</h4>
+  <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2015/12/10/doufm-download-songs/" ><i class="fa fa-file-o"></i>爬取doufm歌曲数据...</a>
+      </li>
     
       <li>
         <a href="/2015/12/09/gis-useful-libs/" ><i class="fa fa-file-o"></i>GIS常用库（web前端）...</a>
@@ -372,7 +420,7 @@ var _hmt = _hmt || [];
 		
 			
 <div class="widget">
-	<h4>Links</h4>
+	<h4>鏈接</h4>
 	<ul class="blogroll list-unstyled">
 	
 		<li><i class="fa fa-github"></i><a href="https://github.com/topwood" title="my git hub" target="_blank"]);">Github</a></li>
