@@ -7,7 +7,7 @@
       <title><![CDATA[爬取doufm歌曲数据]]></title>
       <url>http://www.18710847003.com/2015/12/10/doufm-download-songs/</url>
       <content type="html"><![CDATA[<h2 id="介绍">介绍</h2><p>doufm是由某某大神建立在校内的一个fm网站，上面的歌曲很耐听，导致我经常在上面听歌。毕业季将至，在校外是访问不到的，所以觉得可以down下上面的所有歌曲，在bt上分享给校友。还有，校园网无需登录就能听歌。<br><img src="http://7te95y.com1.z0.glb.clouddn.com/doufm.png" alt="doufm"></p>
-<h2 id="分析">分析</h2><p>用Chrome简单看了下网站的前端代码。发现是用Angular1.x做框架的。分析了下请求的链接、返回的结构，有这两个比较重要的api:</p>
+<h2 id="分析">分析</h2><p>用Chrome简单看了下网站的前端代码。发现是用Angular1.x做框架的。分析了下请求的链接、返回的结构，有这两个比较重要的api:<br><a id="more"></a></p>
 <h3 id="请求播放频道">请求播放频道</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/doufm.info/api</span><span class="regexp">/playlist/</span>?</span><br></pre></td></tr></table></figure>
 <p>返回值<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "<span class="attribute">key</span>": <span class="value"><span class="string">"52f8ca1d1d41c851663fcba7"</span></span>, </span><br><span class="line">        "<span class="attribute">music_list</span>": <span class="value"><span class="number">3726</span></span>, </span><br><span class="line">        "<span class="attribute">name</span>": <span class="value"><span class="string">"\u534e\u8bed"</span></span><br><span class="line">    </span>&#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        "<span class="attribute">key</span>": <span class="value"><span class="string">"52f8ca1d1d41c851663fcba8"</span></span>, </span><br><span class="line">        "<span class="attribute">music_list</span>": <span class="value"><span class="number">2451</span></span>, </span><br><span class="line">        "<span class="attribute">name</span>": <span class="value"><span class="string">"\u6b27\u7f8e"</span></span><br><span class="line">    </span>&#125;,</span><br><span class="line">    ....</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
 <p>哦好，一共有这么多频道，每个频道的歌曲数目有”music_list”那么多个，名字一眼看不出来，没关系，放到chrome的console里面，toString()一下！</p>
@@ -38,6 +38,7 @@
       <content type="html"><![CDATA[<blockquote>
 <p><a href="http://openlayers.org/" target="_blank" rel="external">openlayers3/ol3</a><br><a href="http://cesiumjs.org" target="_blank" rel="external">Cesium.js</a></p>
 </blockquote>
+<a id="more"></a>
 <h2 id="openlayers3/ol3">openlayers3/ol3</h2><blockquote>
 <p>A high-performance, feature-packed library for all your mapping needs.</p>
 </blockquote>
@@ -63,6 +64,7 @@
       <content type="html"><![CDATA[<blockquote>
 <p>PM2<br>Express<br>Loadash<br>Q<br>Request<br>Bluebird<br>EventProxy<br>node-webkit</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="PM2"><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">PM2</a></h2><blockquote>
 <p>PM2是一个带有负载均衡功能的Node应用的进程管理器。当你要把你的独立代码利用全部的服务器上的所有CPU，并保证进程永远都活着，0秒的重载， PM2是完美的。</p>
 </blockquote>
@@ -102,6 +104,7 @@
       <title><![CDATA[node-call-dll]]></title>
       <url>http://www.18710847003.com/2015/11/26/node-call-dll/</url>
       <content type="html"><![CDATA[<h1 id="研究在Node中如何调用dll">研究在Node中如何调用dll</h1><h2 id="背景">背景</h2><p>根据项目需要，我们会有一个vs（2010/2013）生成的dll，在我们的Node服务器上调用，该dll中有一个主要的函数为’getTile’，用来返回某个瓦片（本质是一张图片），该dll由别的单位合作完成，我们只负责调用。getTile函数大概长这样：</p>
+<a id="more"></a>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * id: 字符串，图层名</span><br><span class="line"> * x，y，z: 瓦片坐标</span><br><span class="line"> * len: buffer长度</span><br><span class="line"> */</span></span><br><span class="line"><span class="function">EXPORT <span class="keyword">char</span>* <span class="title">getTile</span><span class="params">(<span class="keyword">char</span>* id,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> l,<span class="keyword">int</span>* len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">//此处是别人的逻辑代码，这里用打开文件模拟。</span></span><br><span class="line">	FILE *fin = fopen(<span class="string">"a.jpg"</span>, <span class="string">"rb"</span>);</span><br><span class="line">	<span class="keyword">char</span>* buf = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="number">1024</span>*<span class="number">1024</span>);</span><br><span class="line">	*len = fread(buf, <span class="number">1</span>, <span class="number">1024</span>*<span class="number">1024</span>, fin);</span><br><span class="line">	<span class="keyword">return</span> buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们两方的平台（操作系统和vs）应该是一致的。</p>
 <h2 id="方案">方案</h2><ol>
