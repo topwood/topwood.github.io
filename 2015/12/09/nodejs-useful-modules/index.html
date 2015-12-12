@@ -123,7 +123,7 @@ var _hmt = _hmt || [];
 	  		
 
 	  <blockquote>
-<p>PM2<br>Express<br>Loadash<br>Q<br>Request<br>Bluebird<br>EventProxy<br>node-webkit</p>
+<p>PM2<br>Express<br>Loadash<br>Q<br>Request<br>Bluebird<br>EventProxy<br>node-webkit<br>http-server</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="PM2"><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">PM2</a></h2><blockquote>
@@ -157,7 +157,11 @@ var _hmt = _hmt || [];
 <p>将前后端整合到一起打包成一个桌面应用！</p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>x<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">    	<span class="comment">// 使用node.js获取系统平台</span></span><br><span class="line">    	<span class="keyword">var</span> os = <span class="built_in">require</span>(<span class="string">'os'</span>)</span><br><span class="line">    	<span class="built_in">document</span>.write(<span class="string">'Our computer is: '</span>, os.platform())</span><br><span class="line">  </span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="说明">说明</h2><p>以上所有模块均可在github或者npm上搜到，故不再给出链接。</p>
+<h2 id="http-server">http-server</h2><blockquote>
+<p>一个轻量的http服务器<br>我一般直接装在全局<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> <span class="keyword">http</span>-<span class="keyword">server</span></span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>然后在任何目录下都能用hs开服务，-p指定端口。windows小技巧：在一个目录下，按住shift+右键可以在当前目录打开cmd。</p>
+<h2 id="说明">说明</h2><p>以上所有模块均可在github或者npm上搜到，故不再给出链接。<br>部分参考自：<br><a href="https://shyling.com/posts/nodejs-useful-module.html" target="_blank" rel="external">shyling的博客</a></p>
 	  
 	</div>
 
@@ -213,7 +217,7 @@ var _hmt = _hmt || [];
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/node/">node<span>3</span></a></li>
+    <li><a href="/categories/node/">node<span>4</span></a></li>
   </li>
 
     </ul>
@@ -226,7 +230,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/node/">node<span>3</span></a></li>
+  <li><a href="/tags/node/">node<span>4</span></a></li>
     </ul>
 	</div>
 		
@@ -236,7 +240,7 @@ var _hmt = _hmt || [];
 	
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PM2"><span class="toc-article-text">PM2</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Express"><span class="toc-article-text">Express</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Loadash"><span class="toc-article-text">Loadash</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Q"><span class="toc-article-text">Q</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Request"><span class="toc-article-text">Request</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Bulebird"><span class="toc-article-text">Bulebird</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#EventProxy"><span class="toc-article-text">EventProxy</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#node-webkit"><span class="toc-article-text">node-webkit</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#说明"><span class="toc-article-text">说明</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PM2"><span class="toc-article-text">PM2</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Express"><span class="toc-article-text">Express</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Loadash"><span class="toc-article-text">Loadash</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Q"><span class="toc-article-text">Q</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Request"><span class="toc-article-text">Request</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Bulebird"><span class="toc-article-text">Bulebird</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#EventProxy"><span class="toc-article-text">EventProxy</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#node-webkit"><span class="toc-article-text">node-webkit</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#http-server"><span class="toc-article-text">http-server</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#说明"><span class="toc-article-text">说明</span></a></li></ol>
 		</div>
 	
 	</div>

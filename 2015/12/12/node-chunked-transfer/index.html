@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Topwood&#39;s blog</title>
+  <title>node中的chunked-transfer | Topwood&#39;s blog</title>
   <meta name="author" content="Topwood LiJie">
   
   <meta name="description" content="Topwood的博客 前端 GIS">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="node中的chunked-transfer"/>
   <meta property="og:site_name" content="Topwood&#39;s blog"/>
 
   
@@ -95,40 +95,29 @@ var _hmt = _hmt || [];
 
   <div class="container">
   	<div class="content">
-    	 <div class="page-header">
-  <h1>hahaha!</h1>
-</div>
+    	 
 
-<div class="row page">
 
 	
+		<div class="page-header">		
+			<h1> node中的chunked-transfer</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
 	<div class="col-md-9">
 	
 
-		<div class="slogan">
-      <i class="fa fa-heart"></i>
-      go go go!
-</div>    
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-12-12 </div>
-			<div class="article-title"><a href="/2015/12/12/node-chunked-transfer/" >node中的chunked-transfer</a></div>						
-		</h3>
-	
+	<!-- content -->
+	<div class="mypage">		
+	  		
 
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="http协议中的transfer-encoding">http协议中的transfer-encoding</h2><blockquote>
+	  <h2 id="http协议中的transfer-encoding">http协议中的transfer-encoding</h2><blockquote>
 <p>Transfer-Encoding，是一个 HTTP 头部字段，字面意思是「传输编码」。实际上，HTTP 协议中还有另外一个头部与编码有关：Content-Encoding（内容编码）。Content-Encoding 通常用于对实体内容进行压缩编码，目的是优化传输，例如用 gzip 压缩文本文件，能大幅减小体积。内容编码通常是选择性的，例如 jpg / png 这类文件一般不开启，因为图片格式已经是高度压缩过的，再压一遍没什么效果不说还浪费 CPU。</p>
 <p>而 Transfer-Encoding 则是用来改变报文格式，它不但不会减少实体内容传输大小，甚至还会使传输变大，那它的作用是什么呢？本文接下来主要就是讲这个。我们先记住一点，Content-Encoding 和 Transfer-Encoding 二者是相辅相成的，对于一个 HTTP 报文，很可能同时进行了内容编码和传输编码。</p>
 </blockquote>
@@ -159,231 +148,112 @@ var _hmt = _hmt || [];
 <p>response headers:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Connection</span><span class="symbol">:keep-alive</span></span><br><span class="line"><span class="constant">Content</span>-<span class="constant">Type</span><span class="symbol">:text/html</span></span><br><span class="line"><span class="constant">Date</span><span class="symbol">:Sat</span>, <span class="number">12</span> <span class="constant">Dec</span> <span class="number">2015</span> <span class="number">04</span><span class="symbol">:</span><span class="number">35</span><span class="symbol">:</span>09 <span class="constant">GMT</span></span><br><span class="line"><span class="constant">Transfer</span>-<span class="constant">Encoding</span><span class="symbol">:chunked</span></span><br></pre></td></tr></table></figure></p>
 <p>因为nodejs天生的异步非阻塞的特点，所以利用bigpipe方式可以有效的解决页面初始化空白的问题,而且哪怕页面内有多个数据加载的部分也可以有效的解决.</p>
 <h2 id="总结">总结</h2><p>Transfer-Encoding:chunked是http的一种分块传输方式;bigpipe能够有效的解决重数据页面的加载问题,这个比ajax异步加载的好处就是利用一个http连接就能解决多数据加载的问题,相比一个连接一个ajax的方式明显能提高不少服务器端性能.</p>
-
-	
+	  
 	</div>
-  <a type="button" href="/2015/12/12/node-chunked-transfer/#more" class="btn btn-default more">閱讀本文</a>
-</div>
 
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-12-10 </div>
-			<div class="article-title"><a href="/2015/12/10/doufm-download-songs/" >爬取doufm歌曲数据</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="介绍">介绍</h2><p>doufm是由某某大神建立在校内的一个fm网站，上面的歌曲很耐听，导致我经常在上面听歌。毕业季将至，在校外是访问不到的，所以觉得可以down下上面的所有歌曲，在bt上分享给校友。还有，校园网无需登录就能听歌。<br><img src="http://7te95y.com1.z0.glb.clouddn.com/doufm.png" alt="doufm"></p>
-<h2 id="分析">分析</h2><p>用Chrome简单看了下网站的前端代码。发现是用Angular1.x做框架的。分析了下请求的链接、返回的结构，有这两个比较重要的api:<br>
-	
-	</div>
-  <a type="button" href="/2015/12/10/doufm-download-songs/#more" class="btn btn-default more">閱讀本文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-12-09 </div>
-			<div class="article-title"><a href="/2015/12/09/gis-useful-libs/" >GIS常用库（web前端）</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<blockquote>
-<p><a href="http://openlayers.org/">openlayers3/ol3</a><br><a href="http://cesiumjs.org">Cesium.js</a></p>
-</blockquote>
-	
-	</div>
-  <a type="button" href="/2015/12/09/gis-useful-libs/#more" class="btn btn-default more">閱讀本文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-12-09 </div>
-			<div class="article-title"><a href="/2015/12/09/nodejs-useful-modules/" title="简介">Node的一些常用的模块(不定时更新)</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<blockquote>
-<p>PM2<br>Express<br>Loadash<br>Q<br>Request<br>Bluebird<br>EventProxy<br>node-webkit<br>http-server</p>
-</blockquote>
-	
-	</div>
-  <a type="button" href="/2015/12/09/nodejs-useful-modules/#more" class="btn btn-default more">閱讀本文</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-11-26 </div>
-			<div class="article-title"><a href="/2015/11/26/node-call-dll/" title="how node call dll">node-call-dll</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="研究在Node中如何调用dll">研究在Node中如何调用dll</h1><h2 id="背景">背景</h2><p>根据项目需要，我们会有一个vs（2010/2013）生成的dll，在我们的Node服务器上调用，该dll中有一个主要的函数为’getTile’，用来返回某个瓦片（本质是一张图片），该dll由别的单位合作完成，我们只负责调用。getTile函数大概长这样：</p>
-	
-	</div>
-  <a type="button" href="/2015/11/26/node-call-dll/#more" class="btn btn-default more">閱讀本文</a>
-</div>
-
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
+	<div>
+  	<center>
+	<div class="pagination">
 <ul class="pagination">
 	 
 		
           <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一頁</a></li>
         
 
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"> <a href="/page/2/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+		   <li class="next"><a href="/2015/12/10/doufm-download-songs/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
 </div>
 
-  		</center>
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2015/12/12/node-chunked-transfer/" data-title="node中的chunked-transfer" data-url="http://www.18710847003.com/2015/12/12/node-chunked-transfer/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-12-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/node/">node<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/node/">node<span>4</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#http协议中的transfer-encoding"><span class="toc-article-text">http协议中的transfer-encoding</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Persistent_Connection"><span class="toc-article-text">Persistent Connection</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Content-Length"><span class="toc-article-text">Content-Length</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Transfer-Encoding:_chunked"><span class="toc-article-text">Transfer-Encoding: chunked</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Bigpipe"><span class="toc-article-text">Bigpipe</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#一个实例"><span class="toc-article-text">一个实例</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#总结"><span class="toc-article-text">总结</span></a></li></ol>
 		</div>
-
-		
-		
-	</div> <!-- col-md-9 -->
-
 	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div class="form-group has-success has-feedback" id="site_search">
-    <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜尋" class="st-search-input st-default-search-input form-control" />
-    </form>
-  </div>  
-
-
-		
-			
-	<div class="widget">
-		<h4>分類</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/gis/">gis<span>1</span></a></li>
-		
-			<li><a href="/categories/node/">node<span>4</span></a></li>
-		
-			<li><a href="/categories/todo/">todo<span>1</span></a></li>
-		
-		</ul>
 	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
 
-		
-			
-	<div class="widget">
-		<h4>標籤雲</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/c/">c++<span>1</span></a></li>
-		
-			<li><a href="/tags/dll/">dll<span>1</span></a></li>
-		
-			<li><a href="/tags/node/">node<span>4</span></a></li>
-		
-			<li><a href="/tags/todo/">todo<span>1</span></a></li>
-		
-			<li><a href="/tags/ffi/">ffi<span>1</span></a></li>
-		
-			<li><a href="/tags/gis/">gis<span>1</span></a></li>
-		
-		 
-		</ul>
 	</div>
-
-
 		
-			
-<div class="widget">
-  <h4>最新文章</h4>
-  <ul class="entry list-unstyled">
-    
-      <li>
-        <a href="/2015/12/12/node-chunked-transfer/" ><i class="fa fa-file-o"></i>node中的chunked-transfer...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/10/doufm-download-songs/" ><i class="fa fa-file-o"></i>爬取doufm歌曲数据...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/09/gis-useful-libs/" ><i class="fa fa-file-o"></i>GIS常用库（web前端）...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/09/nodejs-useful-modules/"  title="简介" ><i class="fa fa-file-o"></i>Node的一些常用的模块(不定时更新)...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/11/26/node-call-dll/"  title="how node call dll" ><i class="fa fa-file-o"></i>node-call-dll...</a>
-      </li>
-    
-  </ul>
-</div>
 
-		
-			
-<div class="widget">
-	<h4>鏈接</h4>
-	<ul class="blogroll list-unstyled">
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/topwood" title="my git hub" target="_blank"]);">Github</a></li>
-	
-		<li><i class=""></i><a href="http://www.zhihu.com/people/li-da-shan-15-59" title="my zhihu." target="_blank"]);">知乎</a></li>
-	
-	</ul>
-</div>
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
 
 
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
 
-	
-	
-</div> <!-- row-fluid -->
 	</div>
   </div>
   <div class="container-narrow">
