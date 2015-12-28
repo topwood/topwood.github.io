@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>gis | Topwood&#39;s blog</title>
+  <title>vector-tiles-introduction | Topwood&#39;s blog</title>
   <meta name="author" content="Topwood LiJie">
   
-  <meta name="description" content="Topwood的博客 前端 GIS">
+  <meta name="description" content="mapbox vecotor tiles 简介">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="vector-tiles-introduction"/>
   <meta property="og:site_name" content="Topwood&#39;s blog"/>
 
   
@@ -97,153 +97,140 @@ var _hmt = _hmt || [];
   	<div class="content">
     	 
 
-<!-- title -->
-<div class="page-header">
-  <h1 class="archive-title-tag">gis</h1>
+
+	
+		<div class="page-header">		
+			<h1> vector-tiles-introduction</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>mapbox vecotor tiles 简介</p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <h2 id="矢量瓦片简介">矢量瓦片简介</h2><p>矢量瓦片技术在为地图提供流畅的设计的同时，使得大量的地图显示更快速。像其名字所描述的一样，矢量瓦片包含了矢量数据而不是传统的已经渲染好的图片。它们使用了一个压缩的，结构化的格式来存储geometries和元数据，例如路名，地名等等。矢量瓦片只有在被客户端（web浏览器、移动app）请求到的时候才会进行渲染。<br>对比渲染好的瓦片，矢量瓦片有两个明显的优势：</p>
+<ul>
+<li>样式： 矢量瓦片的样式可以在请求之后在客户端定制，实现样式与数据源的分离。</li>
+<li>轻量： 矢量瓦片采用自己的存储方式使得它非常小、轻量，所以在高分辨率地图、地图的快速加载、高效缓存方面更有优势。</li>
+</ul>
+<p>参考：<a href="https://www.mapbox.com/developers/vector-tiles/" target="_blank" rel="external">mapbox vector-tiles</a></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2015/12/28/the-first-experience-of-vue/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一頁</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/12/12/node-chunked-transfer/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
 </div>
 
-<div class="row page">
-  <!-- cols -->
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
   
-  <div class="col-md-9">
+  	 <div class="ds-thread" data-thread-key="2015/12/21/vector-tiles-introduction/" data-title="vector-tiles-introduction" data-url="http://www.18710847003.com/2015/12/21/vector-tiles-introduction/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-12-21 
+	</div>
 	
 
-	  <div id="top_search"></div>
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/project/">project<span>1</span></a></li>
+  </li>
 
-	  <div class="archive">
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/gis/">gis<span>2</span></a></li>
+    </ul>
+	</div>
 		
-		
-		
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2015">2015<b class="caret"></b></h4>
-			<ul id="2015" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2015-12-21 </span> &raquo;
-		
-		   <span class="title"><a href="/2015/12/21/vector-tiles-introduction/"  title="mapbox vecotor tiles 简介" >vector-tiles-introduction</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2015-12-09 </span> &raquo;
-		
-		   <span class="title"><a href="/2015/12/09/gis-useful-libs/" >GIS常用库（web前端）</a></span>
-		
-		</li>			
-		
-		</ul>
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#矢量瓦片简介"><span class="toc-article-text">矢量瓦片简介</span></a></li></ol>
 		</div>
-
-</div> <!-- col-md-9/col-md-12 -->
-
-
-<div class="col-md-3">
-	<div id="sidebar">
 	
-			
-  <div class="form-group has-success has-feedback" id="site_search">
-    <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜尋" class="st-search-input st-default-search-input form-control" />
-    </form>
-  </div>  
-
-
-		
-			
-	<div class="widget">
-		<h4>分類</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/frontend/">frontend<span>1</span></a></li>
-		
-			<li><a href="/categories/gis/">gis<span>1</span></a></li>
-		
-			<li><a href="/categories/node/">node<span>4</span></a></li>
-		
-			<li><a href="/categories/project/">project<span>1</span></a></li>
-		
-			<li><a href="/categories/todo/">todo<span>1</span></a></li>
-		
-		</ul>
 	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
 
-		
-			
-	<div class="widget">
-		<h4>標籤雲</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/node/">node<span>4</span></a></li>
-		
-			<li><a href="/tags/gis/">gis<span>2</span></a></li>
-		
-			<li><a href="/tags/ffi/">ffi<span>1</span></a></li>
-		
-			<li><a href="/tags/todo/">todo<span>1</span></a></li>
-		
-			<li><a href="/tags/dll/">dll<span>1</span></a></li>
-		
-			<li><a href="/tags/c/">c++<span>1</span></a></li>
-		
-			<li><a href="/tags/vue/">vue<span>1</span></a></li>
-		
-		 
-		</ul>
 	</div>
-
-
 		
-			
-<div class="widget">
-  <h4>最新文章</h4>
-  <ul class="entry list-unstyled">
-    
-      <li>
-        <a href="/2015/12/28/the-first-experience-of-vue/"  title="vue初探" ><i class="fa fa-file-o"></i>vue初探...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/21/vector-tiles-introduction/"  title="mapbox vecotor tiles 简介" ><i class="fa fa-file-o"></i>vector-tiles-introduction...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/12/node-chunked-transfer/" ><i class="fa fa-file-o"></i>node中的chunked-transfer...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/10/doufm-download-songs/" ><i class="fa fa-file-o"></i>爬取doufm歌曲数据...</a>
-      </li>
-    
-      <li>
-        <a href="/2015/12/09/gis-useful-libs/" ><i class="fa fa-file-o"></i>GIS常用库（web前端）...</a>
-      </li>
-    
-  </ul>
-</div>
 
-		
-			
-<div class="widget">
-	<h4>鏈接</h4>
-	<ul class="blogroll list-unstyled">
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/topwood" title="my git hub" target="_blank"]);">Github</a></li>
-	
-		<li><i class=""></i><a href="http://www.zhihu.com/people/li-da-shan-15-59" title="my zhihu." target="_blank"]);">知乎</a></li>
-	
-	</ul>
-</div>
+</div><!-- row -->
 
-
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
-
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
 
 
 

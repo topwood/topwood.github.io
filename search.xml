@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title><![CDATA[vue初探]]></title>
+      <url>http://www.18710847003.com/2015/12/28/the-first-experience-of-vue/</url>
+      <content type="html"><![CDATA[<h1 id="VUE"><a href="http://cn.vuejs.org/" target="_blank" rel="external">VUE</a></h1><blockquote>
+<p>数据驱动的组件，为现代化的 Web 界面而生</p>
+</blockquote>
+<h2 id="初见">初见</h2><p>听说vue是在知乎上，听说是个我国的大神（youyuxi）写的框架，在知乎好评还<a href="https://www.zhihu.com/question/36898014" target="_blank" rel="external">不错</a>，后来去看了Vue的官网，有中文的，本能的好感。相比之下，react的官网并没有中文支持，看的好累。</p>
+<h2 id="初见2">初见2</h2><p>翻了一下vue的教程和api,大概知道了vue的定位，这里也有跟其他现有的热门框架做的<a href="http://cn.vuejs.org/guide/comparison.html" target="_blank" rel="external">对比</a>。相比之下，vue的性能、灵活性比angular好的多，在写代码的容易程度（相比于不太容易理解的jsx）、中文文档社区支持等要好于react。</p>
+<p><a href="https://www.zhihu.com/question/31585377" target="_blank" rel="external">作者对比vue和react</a></p>
+<h2 id="构建大型应用"><a href="http://cn.vuejs.org/guide/application.html" target="_blank" rel="external">构建大型应用</a></h2><p>在vue的开发中，以.vue为结尾的文件会是一个vue组件，可以写成这样：<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">template</span> <span class="attribute">lang</span>=<span class="value">"jade"</span>&gt;</span></span><br><span class="line">div</span><br><span class="line">  img(class="logo", src="./assets/logo.png")</span><br><span class="line">  h1 </span><span class="expression">&#123;&#123;<span class="variable">msg</span>&#125;&#125;</span><span class="xml"></span><br><span class="line">  comp-a</span><br><span class="line">  comp-b</span><br><span class="line">  counter</span><br><span class="line"><span class="tag">&lt;/<span class="title">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">import</span> CompA <span class="keyword">from</span> <span class="string">'./components/a.vue'</span></span><br><span class="line"><span class="keyword">import</span> CompB <span class="keyword">from</span> <span class="string">'./components/b.vue'</span></span><br><span class="line"><span class="keyword">import</span> Counter <span class="keyword">from</span> <span class="string">'./components/counter.vue'</span></span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: <span class="string">'Hello from vue-loader!'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    CompA,</span><br><span class="line">    CompB,</span><br><span class="line">    Counter</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">lang</span>=<span class="value">"stylus"</span>&gt;</span><span class="css"></span><br><span class="line"><span class="tag">font-stack</span> = <span class="tag">Helvetica</span>, <span class="tag">sans-serif</span></span><br><span class="line"><span class="tag">primary-color</span> = <span class="id">#999</span></span><br><span class="line"><span class="tag">body</span></span><br><span class="line">  <span class="tag">font</span> 100% <span class="tag">font-stack</span></span><br><span class="line">  <span class="tag">color</span> <span class="tag">primary-color</span></span><br><span class="line"></span><br><span class="line"><span class="class">.logo</span></span><br><span class="line">  <span class="tag">width</span> 40<span class="tag">px</span></span><br><span class="line">  <span class="tag">height</span> 40<span class="tag">px</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>这种将css/js/html放到一个文件中做成组件的开发方式对于我来说还是第一次接触，感觉好神奇！完全是一个新的世界。<br>这种写法配合webpack的预处理能力，能将开发变得组件化，换句话说，代码组织的更科学了。</p>
+<h2 id="例子">例子</h2><ul>
+<li><a href="https://github.com/vuejs/vue-loader-example" target="_blank" rel="external">vue-loader-example</a></li>
+<li><a href="https://github.com/shinygang/Vue-cnodejs" target="_blank" rel="external">Vue-cnodejs</a></li>
+</ul>
+<h2 id="前景">前景</h2><p><a href="https://www.zhihu.com/question/38576309" target="_blank" rel="external">Angular2与React，前端的未来志向何方？</a><br>我相信vue这个库正在萌发勃勃生机！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[vector-tiles-introduction]]></title>
+      <url>http://www.18710847003.com/2015/12/21/vector-tiles-introduction/</url>
+      <content type="html"><![CDATA[<h2 id="矢量瓦片简介">矢量瓦片简介</h2><p>矢量瓦片技术在为地图提供流畅的设计的同时，使得大量的地图显示更快速。像其名字所描述的一样，矢量瓦片包含了矢量数据而不是传统的已经渲染好的图片。它们使用了一个压缩的，结构化的格式来存储geometries和元数据，例如路名，地名等等。矢量瓦片只有在被客户端（web浏览器、移动app）请求到的时候才会进行渲染。<br>对比渲染好的瓦片，矢量瓦片有两个明显的优势：</p>
+<ul>
+<li>样式： 矢量瓦片的样式可以在请求之后在客户端定制，实现样式与数据源的分离。</li>
+<li>轻量： 矢量瓦片采用自己的存储方式使得它非常小、轻量，所以在高分辨率地图、地图的快速加载、高效缓存方面更有优势。</li>
+</ul>
+<p>参考：<a href="https://www.mapbox.com/developers/vector-tiles/" target="_blank" rel="external">mapbox vector-tiles</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[node中的chunked-transfer]]></title>
       <url>http://www.18710847003.com/2015/12/12/node-chunked-transfer/</url>
       <content type="html"><![CDATA[<h2 id="http协议中的transfer-encoding">http协议中的transfer-encoding</h2><blockquote>
