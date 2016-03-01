@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello World!</title>
+    <script src="Cesium/build/Cesium.js"></script>
+    <script type="text/javascript" src="Cesium/TileXYZImageryProvider.js"></script>
+    <style>
+      @import url(Cesium/build/Widgets/widgets.css);
+      #cesiumContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+    </style>
+  </head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+    var viewer = new Cesium.Viewer('cesiumContainer',{
+		animation: false,
+		baseLayerPicker: false,
+		infoBox: false,
+		sceneModePicker: true,
+		selectionIndicator: false,
+		timeline: false,
+		navigationHelpButton: false,
+		navigationInstructionsInitiallyVisible: false,
+	});
+    var imageryLayers = viewer.scene.imageryLayers;
+    imageryLayers.removeAll();
+
+    var tileUrl = "https://a.tiles.mapbox.com/v4/topwood.f77a959d/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidG9wd29vZCIsImEiOiJjaWw5Y3IwNzgwanFmdjRtMmlubXFsZXg3In0.ud_5wSAJo07Iz_2YrZTX1A";
+    var tmp = new Cesium.ImageryLayer(
+      new Cesium.TileXYZImageryProvider({
+        url: tileUrl,
+        projectionType: "Mercator",
+        maximumLevel: 12
+      }));
+    imageryLayers.add(tmp);
+  </script>
+</body>
+</html>
