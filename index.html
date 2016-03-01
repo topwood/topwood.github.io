@@ -87,6 +87,12 @@ var _hmt = _hmt || [];
 			</a>
 		  </li>
 		  
+		  <li>
+			<a href="/map" title="神奇的地图.">
+			  <i class="fa fa-globe"></i>地图
+			</a>
+		  </li>
+		  
 		</ul>
       </div>
     </div> <!-- container -->
@@ -113,6 +119,41 @@ var _hmt = _hmt || [];
 		<div class="mypage">
 		
 		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-01-08 </div>
+			<div class="article-title"><a href="/2016/01/08/mongodb实战/" title="海量数据Mongodb从零实战">&#39;mongodb实战&#39;</a></div>						
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="背景">背景</h2><p>因为项目需要，有海量的瓦片数据需要存储和快速检索。该数据有如下特点：</p>
+<ul>
+<li>每个数据的大小在10KB-50KB左右，最大不超过100KB</li>
+<li>数据量相当大:计算方式如下</li>
+</ul>
+<p>假设每个数据在大小为20KB，按照<a href="http://www.cnblogs.com/liongg/archive/2009/04/20/1439905.html" target="_blank" rel="external">墨卡托投影</a>的分瓦片方式，那么第0级有1个瓦片，第n级有（1&lt;<n）^2个瓦片，假设我们的数据量要求存储到16级(真实情况有可能不止16级)，我们写段代码计算一下瓦片数量： <figure="" class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var sum = <span class="number">0</span>,</span><br><span class="line">	minL = <span class="number">0</span>,</span><br><span class="line">	maxL = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">for</span>(var i =minL;i&lt;=maxL;i++)&#123;</span><br><span class="line">	sum+=(<span class="number">1</span>&lt;&lt;i)*(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">&#125;</span><br><span class="line">console.<span class="built_in">log</span>(sum);</span><br></pre></td></tr></table></n）^2个瓦片，假设我们的数据量要求存储到16级(真实情况有可能不止16级)，我们写段代码计算一下瓦片数量：></p>
+<p>0-16级的瓦片数量一共有5726623061个，根据假设，我们的数据量大小在<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">5726623061</span>*<span class="number">20</span>KB/<span class="number">1024</span>/<span class="number">1024</span>/<span class="number">1024</span>)TB ==&gt; <span class="number">106.66</span>TB</span><br></pre></td></tr></table></figure></p>
+<p>可以看出我们需要存储的数据量相当大了，即使这么大也只是一个<em>数据集</em>16级的量，我们的数据可不止一个<em>数据集</em>，也有可能不止16级。这么大的数据应该差不多能用<em>海量</em>来形容了。</p>
+<h2 id="考察">考察</h2><h3 id="Mongodb">Mongodb</h3><ul>
+<li><a href="http://www.csdn.net/article/2012-11-15/2811920-mongodb-quan-gong-lue" target="_blank" rel="external">MongoDB核心贡献者：不是MongoDB不行，而是你不懂！</a></li>
+<li><a href="http://docs.mongoing.com/manual/core/crud-introduction.html" target="_blank" rel="external">中文文档</a></li>
+<li><a href="http://www.runoob.com/mongodb/mongodb-sharding.html" target="_blank" rel="external">中文文档2</a><h3 id="Hbase">Hbase</h3></li>
+</ul>
+<h2 id="实验">实验</h2><h3 id="Mongodb-1">Mongodb</h3><h3 id="Hbase-1">Hbase</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.test12.mapReduce( </span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; emit(<span class="keyword">this</span>.z,<span class="number">1</span>); &#125;, </span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params">key, values</span>) </span>&#123;<span class="keyword">return</span> <span class="built_in">Array</span>.sum(values)&#125;, </span><br><span class="line">      &#123;  </span><br><span class="line">         out:<span class="string">"z_total"</span> </span><br><span class="line">      &#125;</span><br><span class="line">).find()</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2016/01/08/mongodb实战/#more" class="btn btn-default more">閱讀本文</a>
+</div>
+
+			<hr/>
 		
 			
 	
@@ -145,34 +186,6 @@ var _hmt = _hmt || [];
 	
 	</div>
   <a type="button" href="/2015/12/28/the-first-experience-of-vue/#more" class="btn btn-default more">閱讀本文</a>
-</div>
-
-			<hr/>
-		
-			
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-12-21 </div>
-			<div class="article-title"><a href="/2015/12/21/vector-tiles-introduction/" title="mapbox vecotor tiles 简介">vector-tiles-introduction</a></div>						
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="矢量瓦片简介">矢量瓦片简介</h2><p>矢量瓦片技术在为地图提供流畅的设计的同时，使得大量的地图显示更快速。像其名字所描述的一样，矢量瓦片包含了矢量数据而不是传统的已经渲染好的图片。它们使用了一个压缩的，结构化的格式来存储geometries和元数据，例如路名，地名等等。矢量瓦片只有在被客户端（web浏览器、移动app）请求到的时候才会进行渲染。<br>对比渲染好的瓦片，矢量瓦片有两个明显的优势：</p>
-<ul>
-<li>样式： 矢量瓦片的样式可以在请求之后在客户端定制，实现样式与数据源的分离。</li>
-<li>轻量： 矢量瓦片采用自己的存储方式使得它非常小、轻量，所以在高分辨率地图、地图的快速加载、高效缓存方面更有优势。</li>
-</ul>
-<p>参考：<a href="https://www.mapbox.com/developers/vector-tiles/" target="_blank" rel="external">mapbox vector-tiles</a></p>
-
-	
-	</div>
-  <a type="button" href="/2015/12/21/vector-tiles-introduction/#more" class="btn btn-default more">閱讀本文</a>
 </div>
 
 			<hr/>
@@ -306,6 +319,8 @@ var _hmt = _hmt || [];
 		
 			<li><a href="/categories/todo/">todo<span>1</span></a></li>
 		
+			<li><a href="/categories/综合/">综合<span>0</span></a></li>
+		
 		</ul>
 	</div>
 
@@ -315,19 +330,23 @@ var _hmt = _hmt || [];
 		<h4>標籤雲</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/node/">node<span>4</span></a></li>
-		
 			<li><a href="/tags/vue/">vue<span>1</span></a></li>
 		
-			<li><a href="/tags/ffi/">ffi<span>1</span></a></li>
+			<li><a href="/tags/面试准备/">面试准备<span>0</span></a></li>
+		
+			<li><a href="/tags/dll/">dll<span>1</span></a></li>
 		
 			<li><a href="/tags/todo/">todo<span>1</span></a></li>
 		
+			<li><a href="/tags/ffi/">ffi<span>1</span></a></li>
+		
+			<li><a href="/tags/node/">node<span>5</span></a></li>
+		
 			<li><a href="/tags/c/">c++<span>1</span></a></li>
 		
-			<li><a href="/tags/gis/">gis<span>2</span></a></li>
+			<li><a href="/tags/mongodb/">mongodb<span>1</span></a></li>
 		
-			<li><a href="/tags/dll/">dll<span>1</span></a></li>
+			<li><a href="/tags/gis/">gis<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -341,11 +360,11 @@ var _hmt = _hmt || [];
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2015/12/28/the-first-experience-of-vue/"  title="vue初探" ><i class="fa fa-file-o"></i>vue初探...</a>
+        <a href="/2016/01/08/mongodb实战/"  title="海量数据Mongodb从零实战" ><i class="fa fa-file-o"></i>&#39;mongodb实战&#39;...</a>
       </li>
     
       <li>
-        <a href="/2015/12/21/vector-tiles-introduction/"  title="mapbox vecotor tiles 简介" ><i class="fa fa-file-o"></i>vector-tiles-introduction...</a>
+        <a href="/2015/12/28/the-first-experience-of-vue/"  title="vue初探" ><i class="fa fa-file-o"></i>vue初探...</a>
       </li>
     
       <li>
@@ -388,7 +407,7 @@ var _hmt = _hmt || [];
   </div>
   <div class="container-narrow">
   <footer> <p>
-  &copy; 2015 Topwood LiJie
+  &copy; 2016 Topwood LiJie
   
    	<span id="busuanzi_container_site_pv">
     本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次
