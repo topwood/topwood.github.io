@@ -1,59 +1,256 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Hello World!</title>
-    <script src="Cesium/build/Cesium.js"></script>
-    <script type="text/javascript" src="Cesium/TileXYZImageryProvider.js"></script>
-    <style>
-      @import url(Cesium/build/Widgets/widgets.css);
-      #cesiumContainer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        overflow: hidden;
-        padding: 0;
-        font-family: sans-serif;
-      }
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>map | Topwood&#39;s blog</title>
+  <meta name="author" content="Topwood LiJie">
+  
+  <meta name="description" content="Topwood的博客 前端 GIS">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-      html {
-        height: 100%;
-      }
+  <meta property="og:title" content="map"/>
+  <meta property="og:site_name" content="Topwood&#39;s blog"/>
 
-      body {
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-        height: 100%;
-      }
-    </style>
-  </head>
-<body>
-  <div id="cesiumContainer"></div>
-  <script>
-    var viewer = new Cesium.Viewer('cesiumContainer',{
-		animation: false,
-		baseLayerPicker: false,
-		infoBox: false,
-		sceneModePicker: true,
-		selectionIndicator: false,
-		timeline: false,
-		navigationHelpButton: false,
-		navigationInstructionsInitiallyVisible: false,
-	});
-    var imageryLayers = viewer.scene.imageryLayers;
-    imageryLayers.removeAll();
+  
+    <meta property="og:image" content="undefined"/>
+  
 
-    var tileUrl = "https://a.tiles.mapbox.com/v4/topwood.f77a959d/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidG9wd29vZCIsImEiOiJjaWw5Y3IwNzgwanFmdjRtMmlubXFsZXg3In0.ud_5wSAJo07Iz_2YrZTX1A";
-    var tmp = new Cesium.ImageryLayer(
-      new Cesium.TileXYZImageryProvider({
-        url: tileUrl,
-        projectionType: "Mercator",
-        maximumLevel: 12
-      }));
-    imageryLayers.add(tmp);
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?56718378a51bfc2a29cdb155f09b4fbf";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Topwood&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/map" title="神奇的地图.">
+			  <i class="fa fa-globe"></i>地图
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+	
+		<div class="page-header">		
+			<h1> map</h1>
+		</div>		
+	
+
+
+
+<div class="row page">
+	<!-- cols -->
+	
+	<div class="col-md-12">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"Cesium/build/Cesium.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Cesium/TileXYZImageryProvider.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+  <span class="at_rule">@<span class="keyword">import</span> <span class="function">url</span>(Cesium/build/Widgets/widgets.css)</span>;
+  <span class="id">#cesiumContainer</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;
+    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;
+    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;
+    <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">font-family</span>:<span class="value"> sans-serif</span></span>;
+  }</span>
+
+  <span class="tag">html</span> <span class="rules">{
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;
+  }</span>
+
+  <span class="tag">body</span> <span class="rules">{
+    <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;
+    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;
+  }</span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+</code></pre><p>  <div id="cesiumContainer"></div><br>  <script><br>    var viewer = new Cesium.Viewer(‘cesiumContainer’,{<br>        animation: false,<br>        baseLayerPicker: false,<br>        infoBox: false,<br>        sceneModePicker: true,<br>        selectionIndicator: false,<br>        timeline: false,<br>        navigationHelpButton: false,<br>        navigationInstructionsInitiallyVisible: false,<br>    });<br>    var imageryLayers = viewer.scene.imageryLayers;<br>    imageryLayers.removeAll();</p>
+<pre><code><span class="keyword">var</span> tileUrl = <span class="string">"https://a.tiles.mapbox.com/v4/topwood.f77a959d/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidG9wd29vZCIsImEiOiJjaWw5Y3IwNzgwanFmdjRtMmlubXFsZXg3In0.ud_5wSAJo07Iz_2YrZTX1A"</span>;
+<span class="keyword">var</span> tmp = <span class="keyword">new</span> Cesium.ImageryLayer(
+  <span class="keyword">new</span> Cesium.TileXYZImageryProvider({
+    url: tileUrl,
+    projectionType: <span class="string">"Mercator"</span>,
+    maximumLevel: <span class="number">12</span>
+  }));
+imageryLayers.add(tmp);
+</code></pre><p>  </script></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+	</div> <!-- col-md-9/col-md-12 -->
+		
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Topwood LiJie
+  
+   	<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+	<span id="busuanzi_container_page_pv" style='display:none'>
+  		当前页面总阅读量<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+</p>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4omjxtiikqhuMyMYz-QF','2.0.0');
   </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
 </body>
-</html>
+   </html>

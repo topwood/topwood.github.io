@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在Chrome中调试worker代码遇到的坑 | Topwood&#39;s blog</title>
+  <meta name="author" content="Topwood LiJie">
+  
+  <meta name="description" content="记录在Chrome中调试worker代码的历程">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="在Chrome中调试worker代码遇到的坑"/>
+  <meta property="og:site_name" content="Topwood&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?56718378a51bfc2a29cdb155f09b4fbf";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Topwood&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/map" title="神奇的地图.">
+			  <i class="fa fa-globe"></i>地图
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> 在Chrome中调试worker代码遇到的坑</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>记录在Chrome中调试worker代码的历程</p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <h2 id="背景">背景</h2><p>项目中有一段代码由<em>ol.js</em>开辟web worker线程跑在主线程（绘制线程）之外，主要是因为这段代码涉及到图像的处理，具体来说是将一个由每个像素点都由地理高度值的文件实时转化成<em>rgba</em>值，用来呈现不同海拔值的不同高度（目标）。该函数由自己定义，写转化逻辑。函数中有很大的循环，对文件处理的两层for循环基本在百万次左右，所以有必要放到woker线程中计算。</p>
+<a id="more"></a>
+<h2 id="尝试">尝试</h2><p>想用这种方式达到我们的目标是因为到ol上看到一个demo,见<a href="http://openlayers.org/en/v3.9.0/examples/shaded-relief.html" target="_blank" rel="external">ol上的example</a>。由于循环过大，里面的处理逻辑也比较繁琐。各种三角函数的处理，逻辑比较复杂很难看明白，所以<em>调试</em>一下就显得很有用。在尝试打了断点以后发现，代码是执行了，断点并没有停下来！我了个去。。好。断点不行我输出总行吧。然后就在两层for循环的里面输出了一个值看看具体是啥。结果，浏览器的调试工具直接崩了。。很好，上百万的循环输出肯定会崩。</p>
+<h2 id="解决">解决</h2><p>在网上搜了一下在Worker中调试代码，大概是需要一个比较特别的chrome浏览器版本才能断点进去。可是，要重新装一个chrome，多麻烦，就想了一个简单的调试方式。。很挫但是挺有用的。。方法就是例如控制只让他输出20次输出。这样就不会卡崩。这种很挫的方式竟然是眼前解决问题的最有效方式。在改造完shade函数的逻辑之后，用这种挫方法果然成功地输出了我想要的值，接着就是改动下逻辑，完成上面的目标。大概就是给几个高度值的范围，例如（0-1800）有一个颜色的渐变。这过程中还找了一下怎么搞颜色线性渐变。。比如（45,212,245,255）的一个颜色到（89,45,121,255）的颜色，只要对应的r值、g值、b值线性渐变就行。。</p>
+<h2 id="新问题">新问题</h2><p>在自己电脑上调试完之后，去生成环境更新完代码，本以为可以成功呢。结果在别的电脑上打卡后竟然在控制台报了一个错：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImageData <span class="keyword">not</span> found</span><br></pre></td></tr></table></figure></p>
+<p>我去。。这个东西不应该是内置的吗，在控制台里打了一下Image，有提示ImageData这个东西啊！可是为什么会出上面那个奇怪的错，竟然没找到这个类。初步猜想又是worker的原因。搜了一下MDN，看了上面的介绍觉得可能是浏览器版本的关系。结果看了下这个浏览器版本是chrome31.x，自己电脑上是chrome45.x，好的，应该是这个原因，换了浏览器版本果然好了。结论就是说chrome的低版本也不支持在worker中用一些原生对象，要注意。</p>
+<h2 id="结论">结论</h2><p>如果要考虑浏览器的兼容性，上面的代码就跪了，还好，咱们的要求没那么高。浏览器的版本对不同的特性的支持也不一样，第一次遇到这样的问题还是有点措手不及，不过吃一堑长一智，以后遇到类似的问题就基本有经验了。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一頁</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/12/28/the-first-experience-of-vue/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2016/03/14/debug-worker-code-in-chrome/" data-title="在Chrome中调试worker代码遇到的坑" data-url="http://www.18710847003.com/2016/03/14/debug-worker-code-in-chrome/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-03-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/frontend/">frontend<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/js/">js<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#背景"><span class="toc-article-text">背景</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#尝试"><span class="toc-article-text">尝试</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#解决"><span class="toc-article-text">解决</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#新问题"><span class="toc-article-text">新问题</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#结论"><span class="toc-article-text">结论</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Topwood LiJie
+  
+   	<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+	<span id="busuanzi_container_page_pv" style='display:none'>
+  		当前页面总阅读量<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+</p>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4omjxtiikqhuMyMYz-QF','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

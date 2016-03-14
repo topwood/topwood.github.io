@@ -4,22 +4,16 @@
   
     
     <entry>
-      <title><![CDATA['mongodb实战']]></title>
-      <url>http://www.18710847003.com/2016/01/08/mongodb%E5%AE%9E%E6%88%98/</url>
-      <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>因为项目需要，有海量的瓦片数据需要存储和快速检索。该数据有如下特点：</p>
-<ul>
-<li>每个数据的大小在10KB-50KB左右，最大不超过100KB</li>
-<li>数据量相当大:计算方式如下</li>
-</ul>
-<p>假设每个数据在大小为20KB，按照<a href="http://www.cnblogs.com/liongg/archive/2009/04/20/1439905.html" target="_blank" rel="external">墨卡托投影</a>的分瓦片方式，那么第0级有1个瓦片，第n级有（1&lt;<n）^2个瓦片，假设我们的数据量要求存储到16级(真实情况有可能不止16级)，我们写段代码计算一下瓦片数量： <figure="" class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var sum = <span class="number">0</span>,</span><br><span class="line">	minL = <span class="number">0</span>,</span><br><span class="line">	maxL = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">for</span>(var i =minL;i&lt;=maxL;i++)&#123;</span><br><span class="line">	sum+=(<span class="number">1</span>&lt;&lt;i)*(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">&#125;</span><br><span class="line">console.<span class="built_in">log</span>(sum);</span><br></pre></td></tr></table></n）^2个瓦片，假设我们的数据量要求存储到16级(真实情况有可能不止16级)，我们写段代码计算一下瓦片数量：></p>
-<p>0-16级的瓦片数量一共有5726623061个，根据假设，我们的数据量大小在<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">5726623061</span>*<span class="number">20</span>KB/<span class="number">1024</span>/<span class="number">1024</span>/<span class="number">1024</span>)TB ==&gt; <span class="number">106.66</span>TB</span><br></pre></td></tr></table></figure></p>
-<p>可以看出我们需要存储的数据量相当大了，即使这么大也只是一个<em>数据集</em>16级的量，我们的数据可不止一个<em>数据集</em>，也有可能不止16级。这么大的数据应该差不多能用<em>海量</em>来形容了。</p>
-<h2 id="考察">考察</h2><h3 id="Mongodb">Mongodb</h3><ul>
-<li><a href="http://www.csdn.net/article/2012-11-15/2811920-mongodb-quan-gong-lue" target="_blank" rel="external">MongoDB核心贡献者：不是MongoDB不行，而是你不懂！</a></li>
-<li><a href="http://docs.mongoing.com/manual/core/crud-introduction.html" target="_blank" rel="external">中文文档</a></li>
-<li><a href="http://www.runoob.com/mongodb/mongodb-sharding.html" target="_blank" rel="external">中文文档2</a><h3 id="Hbase">Hbase</h3></li>
-</ul>
-<h2 id="实验">实验</h2><h3 id="Mongodb-1">Mongodb</h3><h3 id="Hbase-1">Hbase</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.test12.mapReduce( </span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; emit(<span class="keyword">this</span>.z,<span class="number">1</span>); &#125;, </span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params">key, values</span>) </span>&#123;<span class="keyword">return</span> <span class="built_in">Array</span>.sum(values)&#125;, </span><br><span class="line">      &#123;  </span><br><span class="line">         out:<span class="string">"z_total"</span> </span><br><span class="line">      &#125;</span><br><span class="line">).find()</span><br></pre></td></tr></table></figure>]]></content>
+      <title><![CDATA[在Chrome中调试worker代码遇到的坑]]></title>
+      <url>http://www.18710847003.com/2016/03/14/debug-worker-code-in-chrome/</url>
+      <content type="html"><![CDATA[<h2 id="背景">背景</h2><p>项目中有一段代码由<em>ol.js</em>开辟web worker线程跑在主线程（绘制线程）之外，主要是因为这段代码涉及到图像的处理，具体来说是将一个由每个像素点都由地理高度值的文件实时转化成<em>rgba</em>值，用来呈现不同海拔值的不同高度（目标）。该函数由自己定义，写转化逻辑。函数中有很大的循环，对文件处理的两层for循环基本在百万次左右，所以有必要放到woker线程中计算。</p>
+<a id="more"></a>
+<h2 id="尝试">尝试</h2><p>想用这种方式达到我们的目标是因为到ol上看到一个demo,见<a href="http://openlayers.org/en/v3.9.0/examples/shaded-relief.html" target="_blank" rel="external">ol上的example</a>。由于循环过大，里面的处理逻辑也比较繁琐。各种三角函数的处理，逻辑比较复杂很难看明白，所以<em>调试</em>一下就显得很有用。在尝试打了断点以后发现，代码是执行了，断点并没有停下来！我了个去。。好。断点不行我输出总行吧。然后就在两层for循环的里面输出了一个值看看具体是啥。结果，浏览器的调试工具直接崩了。。很好，上百万的循环输出肯定会崩。</p>
+<h2 id="解决">解决</h2><p>在网上搜了一下在Worker中调试代码，大概是需要一个比较特别的chrome浏览器版本才能断点进去。可是，要重新装一个chrome，多麻烦，就想了一个简单的调试方式。。很挫但是挺有用的。。方法就是例如控制只让他输出20次输出。这样就不会卡崩。这种很挫的方式竟然是眼前解决问题的最有效方式。在改造完shade函数的逻辑之后，用这种挫方法果然成功地输出了我想要的值，接着就是改动下逻辑，完成上面的目标。大概就是给几个高度值的范围，例如（0-1800）有一个颜色的渐变。这过程中还找了一下怎么搞颜色线性渐变。。比如（45,212,245,255）的一个颜色到（89,45,121,255）的颜色，只要对应的r值、g值、b值线性渐变就行。。</p>
+<h2 id="新问题">新问题</h2><p>在自己电脑上调试完之后，去生成环境更新完代码，本以为可以成功呢。结果在别的电脑上打卡后竟然在控制台报了一个错：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImageData <span class="keyword">not</span> found</span><br></pre></td></tr></table></figure></p>
+<p>我去。。这个东西不应该是内置的吗，在控制台里打了一下Image，有提示ImageData这个东西啊！可是为什么会出上面那个奇怪的错，竟然没找到这个类。初步猜想又是worker的原因。搜了一下MDN，看了上面的介绍觉得可能是浏览器版本的关系。结果看了下这个浏览器版本是chrome31.x，自己电脑上是chrome45.x，好的，应该是这个原因，换了浏览器版本果然好了。结论就是说chrome的低版本也不支持在worker中用一些原生对象，要注意。</p>
+<h2 id="结论">结论</h2><p>如果要考虑浏览器的兼容性，上面的代码就跪了，还好，咱们的要求没那么高。浏览器的版本对不同的特性的支持也不一样，第一次遇到这样的问题还是有点措手不及，不过吃一堑长一智，以后遇到类似的问题就基本有经验了。</p>
+]]></content>
     </entry>
     
     <entry>
