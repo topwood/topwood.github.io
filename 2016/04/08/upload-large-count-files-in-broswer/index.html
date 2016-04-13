@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>upload-large-count-files-in-broswer | Topwood&#39;s blog</title>
+  <meta name="author" content="Topwood LiJie">
+  
+  <meta name="description" content="本文探索在浏览器上传大量文件（百万-千万文件）">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="upload-large-count-files-in-broswer"/>
+  <meta property="og:site_name" content="Topwood&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?56718378a51bfc2a29cdb155f09b4fbf";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Topwood&#39;s blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/map" title="神奇的地图.">
+			  <i class="fa fa-globe"></i>地图
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> upload-large-count-files-in-broswer</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>本文探索在浏览器上传大量文件（百万-千万文件）</p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <h2 id="背景">背景</h2><p>由于项目需要，需要做一个供浏览器端上传大量数量文件的工具。该工具需要具备下述特性：</p>
+<ol>
+<li>可以选择或拖拽文件夹</li>
+<li>文件夹里面可以嵌套文件夹</li>
+</ol>
+<p>有人会问为什么不将所有文件打包再传输？这个主要是考虑到我们的<em>瓦片</em>数据，在上传到服务器之后需要一个一个存放到hadoop中，若果打包上传，只能在全部上传完以后解压放到hadoop，无法实现<em>流式</em>的传输，由于数据量巨大（上T），效率会比一个一个上传低很多。</p>
+<h2 id="考察">考察</h2><h3 id="dropzone-js"><a href="http://www.dropzonejs.com/" target="_blank" rel="external">dropzone.js</a></h3><p>优点：该库实现了拖拽文件夹的功能，并支持嵌套的文件夹。<br>缺点：界面单一，如无法显示所有文件数量、进度条等信息。</p>
+<h3 id="angular-file-upload"><a href="https://github.com/nervgh/angular-file-upload" target="_blank" rel="external">angular-file-upload</a></h3><p>优点：由于该库是angular的插件，项目比较符合，界面比较美观，有些双向数据绑定的功能可以很强大。<br>缺点：本身没有拖拽文件夹的功能更不用说支持文件夹嵌套</p>
+<p>由于<code>angular-file-upload</code>界面比较美观，有现成的例子可用，最后选择使用angular-file-upload,拖拽文件夹、支持嵌套功能可以用dropzone.js的部分代码移植实现。</p>
+<h2 id="实现">实现</h2><h3 id="功能移植">功能移植</h3><p>根据分析<code>dropzone.js</code>源码，找到关键代码<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Dropzone.prototype._addFilesFromItems = <span class="function"><span class="keyword">function</span><span class="params">(items)</span> </span>&#123;</span><br><span class="line">     ...</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   Dropzone.prototype._addFilesFromDirectory = <span class="function"><span class="keyword">function</span><span class="params">(directory, path)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> dirReader, errorHandler, readEntries;</span><br><span class="line">     dirReader = directory.createReader();</span><br><span class="line">    ...</span><br><span class="line">     readEntries = (<span class="function"><span class="keyword">function</span><span class="params">(_this)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> dirReader.readEntries(<span class="function"><span class="keyword">function</span><span class="params">(entries)</span> </span>&#123;</span><br><span class="line">          	   ...</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="comment">//此处要特别注意</span></span><br><span class="line">             <span class="comment">//Recursively call readEntries() again, since browser only handle</span></span><br><span class="line">          <span class="comment">//the first 100 entries.</span></span><br><span class="line">          <span class="comment">//See: https://developer.mozilla.org/en-US/docs/Web/API/DirectoryReader#readEntries</span></span><br><span class="line">          <span class="comment">//See: https://github.com/enyo/dropzone/issues/599</span></span><br><span class="line">          <span class="comment">//by lijie 2016 0405</span></span><br><span class="line">             readEntries();</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">         &#125;, errorHandler);</span><br><span class="line">       &#125;;</span><br><span class="line">     &#125;)(<span class="keyword">this</span>);</span><br><span class="line">     <span class="keyword">return</span> readEntries();</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这部分关键代码稍微改动下移植到<code>angular-file-upload</code>即可实现拖拽文件夹并支持嵌套。里面用了<a href="https://developer.mozilla.org/en-US/docs/Web/API/DirectoryReader" target="_blank" rel="external">DirectoryReader</a>。值得一提的是，DirectoryEntry还有一个DirectoryEntrySync，说明DirectoryEntry是一个异步的api，该api只在Chrome中支持，不过，由于我的项目对浏览器没有要求，这个也不做额外考虑。</p>
+<h3 id="后端实现">后端实现</h3><p>用<code>multer</code>先简单实现了一个服务器做测试。</p>
+<h2 id="遇到的问题">遇到的问题</h2><p>一种理想的情况是，在浏览器读文件的过程中，读到一个文件，立马发送一个ajax请求，等它的回调函数执行完，再进行读取下一个文件，这样就不会在Javascript层面阻塞ajax的返回回调函数。事实上以上代码在执行过程中会不断地循环读取文件夹中的内容导致ajax(上传)的回调函数被阻塞，直到所有文件读取完毕，js执行队列才会处理回调，而且，angular-file-upload在上传过程中会有一个上传状态，当状态在Uploading的时候，其他文件的ajax请求不会发出，所以导致的现象一般是，发出了一个upload请求，然后一直pending,等遍历完文件夹，存放到一个js的队列中，再处理第一个upload的回调。在上传数量不太大的时候（几万个小文件），可以基本不会卡顿（卡顿来自于遍历读文件夹）。但是一旦文件数量很大（几百万）的时候，浏览器会直接卡崩溃。</p>
+<h2 id="考虑的解决方法">考虑的解决方法</h2><ol>
+<li>使用<a href="https://github.com/caolan/async" target="_blank" rel="external">async</a>做流程控制，控制一个完整的请求是从发出请求到处理完回调。</li>
+<li>。。</li>
+</ol>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一頁</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/03/14/debug-worker-code-in-chrome/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div class="ds-thread" data-thread-key="2016/04/08/upload-large-count-files-in-broswer/" data-title="upload-large-count-files-in-broswer" data-url="http://www.18710847003.com/2016/04/08/upload-large-count-files-in-broswer/"></div>  
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-04-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/project/">project<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/angular/">angular<span>1</span></a></li> <li><a href="/tags/file-upload/">file-upload<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#背景"><span class="toc-article-text">背景</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#考察"><span class="toc-article-text">考察</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#dropzone-js"><span class="toc-article-text">dropzone.js</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#angular-file-upload"><span class="toc-article-text">angular-file-upload</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#实现"><span class="toc-article-text">实现</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#功能移植"><span class="toc-article-text">功能移植</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#后端实现"><span class="toc-article-text">后端实现</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#遇到的问题"><span class="toc-article-text">遇到的问题</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#考虑的解决方法"><span class="toc-article-text">考虑的解决方法</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'topwood' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Topwood LiJie
+  
+   	<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+	<span id="busuanzi_container_page_pv" style='display:none'>
+  		当前页面总阅读量<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次
+	</span>
+</p>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4omjxtiikqhuMyMYz-QF','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
